@@ -11,8 +11,9 @@
     "max-line-length": [true, 150],
     "member-ordering": [false],
     "interface-name": [false],
-    "arrow-parens": false,
-    "object-literal-sort-keys": false
+    "arrow-parens": true,
+    "object-literal-sort-keys": false,
+    "trailing-comma": false
   },
   "rulesDirectory": []
 }

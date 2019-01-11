@@ -1,0 +1,11 @@
+# Main data models/functionality
+
+☐ Misc
+  ☐ Logging to file
+
+☐ Users
+  ☐ Login/logout
+  ☐ Password reset
+  ☐ Login activity
+  ☐ User roles
+  ☐ User config
