@@ -4,7 +4,7 @@
   ☐ Logging to file
 
 ☐ Users
-  ☐ Authentication
+  ✔ Authentication @done(19-01-11 00:43)
   ☐ Password reset
   ☐ Login activity
   ☐ User roles

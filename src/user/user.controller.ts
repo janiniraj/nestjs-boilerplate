@@ -7,14 +7,11 @@ import {
   UseGuards,
   Req
 } from '@nestjs/common';
-import { Request } from 'express';
 
 import { EmmLogger } from 'src/logger/logger';
 import { UserDto } from './dtos/createUser.dto';
 import { UserService } from './user.service';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from './user.entity';
-import { JwtPayload } from 'src/auth/interfaces/jwtPayload.interface';
 
 @Controller('user')
 export class UserController {
