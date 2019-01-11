@@ -12,7 +12,10 @@ export class UserService {
   ) {}
 
   async findOneByEmail(email: string) {
-    return await this.userRepository.findOne({ email });
+    return await this.userRepository.findOne({
+      where: { email },
+      select: ['email']
+    });
   }
 
   async createUser(createUserDto: UserDto): Promise<User> {
