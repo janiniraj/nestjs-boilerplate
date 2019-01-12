@@ -2,23 +2,23 @@ import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { EmmLogger } from 'src/logger/logger';
 import { User } from 'src/user/user.entity';
+import { GqlExecutionContext } from '@nestjs/graphql';
 
 @Injectable()
-export class RolesGuard implements CanActivate {
-  private readonly logger = new EmmLogger(RolesGuard.name);
+export class GraphqlRolesGuard implements CanActivate {
+  private readonly logger = new EmmLogger(GraphqlRolesGuard.name);
 
   constructor(private readonly reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
     const roles = this.reflector.get<string[]>('roles', context.getHandler());
-    this.logger.log(`Verifying access to roles: ${roles}`);
 
     if (!roles) {
       return true;
     }
 
-    const request = context.switchToHttp().getRequest();
-    const user: User = request.user;
+    const ctx = GqlExecutionContext.create(context);
+    const user: User = ctx.getContext().req.user;
 
     const hasRole = () =>
       user.roles.some(

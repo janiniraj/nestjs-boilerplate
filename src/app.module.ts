@@ -7,7 +7,6 @@ import { AuthModule } from './auth/auth.module';
 import { DateScalar } from './common/scalars/date.scalar';
 import { RoleModule } from './role/role.module';
 
-
 @Module({
   imports: [
     GraphQLModule.forRoot({

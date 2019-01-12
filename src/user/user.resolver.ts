@@ -14,10 +14,12 @@ import { EmmLogger } from 'src/logger/logger';
 import { GqlAuthGuard } from 'src/common/guards/graphqlAuth.guard';
 import { RoleService } from 'src/role/role.service';
 import { User } from './user.entity';
-import { RolesGuard } from 'src/common/guards/roles.guard';
+import { Roles } from 'src/common/decorators/roles.decorator';
+import { roles } from 'src/common/constants';
+import { GraphqlRolesGuard } from 'src/common/guards/graphqlRoles.guard';
 
 @Resolver('User')
-@UseGuards(GqlAuthGuard)
+@UseGuards(GqlAuthGuard, GraphqlRolesGuard)
 export class UserResolver {
   private readonly logger = new EmmLogger(UserResolver.name);
 
@@ -32,6 +34,7 @@ export class UserResolver {
   }
 
   @Mutation()
+  @Roles(roles.ADMIN)
   async createUser(
     @Args('email') email: string,
     @Args('password') password: string

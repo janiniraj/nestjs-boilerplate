@@ -5,3 +5,4 @@ ormconfig.json
 ormconfig.json
 
 logs/*.log
+dist

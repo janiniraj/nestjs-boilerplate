@@ -2,6 +2,7 @@
 
 ☐ Misc
   ☐ Logging to file
+  ☐ Log unique ID for each request
 
 ☐ Users
   ✔ Authentication @done(19-01-11 00:43)
