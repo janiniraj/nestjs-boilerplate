@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-
 import { ConfigModule } from './config/config.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { DateScalar } from './common/scalars/date.scalar';
+import { RoleModule } from './role/role.module';
+
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { DateScalar } from './common/scalars/date.scalar';
     TypeOrmModule.forRoot(),
     ConfigModule,
     UserModule,
-    AuthModule
+    AuthModule,
+    RoleModule
   ],
   controllers: [],
   providers: []
