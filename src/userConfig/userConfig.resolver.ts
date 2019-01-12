@@ -23,6 +23,7 @@ export class UserConfigResolver {
     @Args('type') type: 'string' | 'number' | 'boolean',
     @Args('userEditable') userEditable: boolean
   ) {
+    this.logger.log('Creating config value');
     return await this.userConfigService.createUserConfig({
       userId,
       name,
