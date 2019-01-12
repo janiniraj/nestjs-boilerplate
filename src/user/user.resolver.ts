@@ -10,7 +10,7 @@ import {
 import { UseGuards } from '@nestjs/common';
 
 import { UserService } from './user.service';
-import { EmmLogger } from 'src/logger/logger';
+import { EmmLogger } from 'src/logger/EmmLogger';
 import { GqlAuthGuard } from 'src/auth/guards/graphqlAuth.guard';
 import { RoleService } from 'src/role/role.service';
 import { User } from './user.entity';

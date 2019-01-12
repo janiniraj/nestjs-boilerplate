@@ -1,6 +1,6 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { EmmLogger } from 'src/logger/logger';
+import { EmmLogger } from 'src/logger/EmmLogger';
 import { User } from 'src/user/user.entity';
 import { GqlExecutionContext } from '@nestjs/graphql';
 

@@ -7,7 +7,7 @@ import {
   Req
 } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
-import { EmmLogger } from 'src/logger/logger';
+import { EmmLogger } from 'src/logger/EmmLogger';
 import { LoginDto } from './interfaces/login.dto';
 import { AuthService } from './auth.service';
 import { LoginRecordService } from 'src/loginRecord/loginRecord.service';

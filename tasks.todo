@@ -1,15 +1,16 @@
-# Main data models/functionality
-
+# Functionality agnostic to the EMM portal (applicable to boilerplate)
 ☐ Misc
   ☐ Logging to file
   ☐ Log unique ID for each request
 
 ☐ Users
-  ✔ Authentication @done(19-01-11 00:43)
   ☐ Password reset
   ☐ Two-factor auth
+
+☐ Notifications
+
+Archive:
+  ✔ Authentication @done(19-01-11 00:43)
   ✔ Login activity @done(19-01-12 15:23)
   ✔ User roles @done(19-01-12 14:54)
   ✔ User config @done(19-01-12 14:54)
-
-☐ Notifications

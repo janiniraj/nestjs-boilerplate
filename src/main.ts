@@ -4,7 +4,7 @@ dotenv.config();
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app.module';
-import { EmmLogger } from './logger/logger';
+import { EmmLogger } from './logger/EmmLogger';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
