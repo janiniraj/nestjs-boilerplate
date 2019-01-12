@@ -1,6 +1,5 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { EmmLogger } from 'src/logger/logger';
-import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 
 @Resolver('Auth')

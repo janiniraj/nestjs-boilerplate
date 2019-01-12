@@ -12,7 +12,8 @@ import { DateScalar } from './common/scalars/date.scalar';
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
       playground: process.env.NODE_ENV === 'development',
-      resolvers: { Date: DateScalar }
+      resolvers: { Date: DateScalar },
+      context: ({ req }) => ({ req })
     }),
     TypeOrmModule.forRoot(),
     ConfigModule,
