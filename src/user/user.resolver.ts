@@ -1,9 +1,11 @@
-import { Resolver, Query } from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
+import { Resolver, Query, Context } from '@nestjs/graphql';
+import { UseGuards, Req } from '@nestjs/common';
 
 import { UserService } from './user.service';
 import { EmmLogger } from 'src/logger/logger';
 import { GqlAuthGuard } from 'src/auth/guards/graphqlAuth.guard';
+import { User } from './user.entity';
+import { AuthGuard } from '@nestjs/passport';
 
 @Resolver('User')
 export class UserResolver {
@@ -13,7 +15,7 @@ export class UserResolver {
 
   @Query()
   @UseGuards(GqlAuthGuard)
-  async user() {
-    return this.userService.findOneByEmail('test@kryptowire.com');
+  async user(@Context('req') req) {
+    return this.userService.findOneByEmail(req.user.email);
   }
 }

@@ -1,10 +1,11 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import * as jwt from 'jsonwebtoken';
 
 import { JwtPayload } from './interfaces/jwtPayload.interface';
 import { EmmLogger } from 'src/logger/logger';
 import { User } from 'src/user/user.entity';
-import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 
 @Injectable()
@@ -70,5 +71,10 @@ export class AuthService {
       expiresIn: '24h',
       accessToken
     };
+  }
+
+  async validateToken(token: string) {
+    this.logger.log(`Verifying token: ${token}`);
+    return jwt.verify(token.split(' ')[1], process.env.APP_KEY);
   }
 }
