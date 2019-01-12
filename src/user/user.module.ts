@@ -5,9 +5,14 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { AuthModule } from 'src/auth/auth.module';
 import { UserResolver } from './user.resolver';
+import { RoleModule } from 'src/role/role.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), forwardRef(() => AuthModule)],
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    forwardRef(() => AuthModule),
+    RoleModule
+  ],
   controllers: [UserController],
   providers: [UserService, UserResolver],
   exports: [UserService]
