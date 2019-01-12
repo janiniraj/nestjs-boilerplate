@@ -17,6 +17,7 @@ import { User } from './user.entity';
 import { Roles } from 'src/role/decorators/roles.decorator';
 import { roles } from 'src/common/constants';
 import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
+import { UserConfigService } from 'src/userConfig/userConfig.service';
 
 @Resolver('User')
 @UseGuards(GqlAuthGuard, GqlRolesGuard)
@@ -25,7 +26,8 @@ export class UserResolver {
 
   constructor(
     private readonly userService: UserService,
-    private readonly roleService: RoleService
+    private readonly roleService: RoleService,
+    private readonly userConfigService: UserConfigService
   ) {}
 
   @Query()
@@ -45,5 +47,10 @@ export class UserResolver {
   @ResolveProperty()
   async roles(@Parent() user: User) {
     return await this.roleService.findAll({ userId: user.id });
+  }
+
+  @ResolveProperty()
+  async configSettings(@Parent() user: User) {
+    return await this.userConfigService.findAll({ userId: user.id });
   }
 }

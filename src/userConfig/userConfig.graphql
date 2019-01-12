@@ -1,0 +1,16 @@
+type UserConfig {
+  name: String!
+  value: String!
+  type: String!
+  userEditable: Boolean!
+}
+
+type Mutation {
+  createUserConfig(
+    userId: Int!
+    name: String!
+    value: String!
+    type: String!
+    userEditable: Boolean
+  ): UserConfig
+}

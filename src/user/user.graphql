@@ -9,6 +9,7 @@ type User {
   lastLogin: Date
   loginAttempts: Int!
   roles: [Role]
+  configSettings: [UserConfig]
 }
 
 type Query {

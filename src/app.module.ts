@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ConfigModule } from './config/config.module';
+import { UserConfigModule } from './userConfig/userConfig.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
@@ -16,10 +16,10 @@ import { RoleModule } from './role/role.module';
       context: ({ req }) => ({ req })
     }),
     TypeOrmModule.forRoot(),
-    ConfigModule,
     UserModule,
     AuthModule,
-    RoleModule
+    RoleModule,
+    UserConfigModule
   ],
   controllers: [],
   providers: []

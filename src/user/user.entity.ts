@@ -11,6 +11,7 @@ import {
 import { IsEmail } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 import { Role } from 'src/role/role.entity';
+import { UserConfig } from 'src/userConfig/userConfig.entity';
 
 @Entity()
 @Unique(['email'])
@@ -45,6 +46,9 @@ export class User {
 
   @OneToMany((type) => Role, (role) => role.user)
   roles: Role[];
+
+  @OneToMany((type) => UserConfig, (config) => config.user)
+  configSettings: UserConfig[];
 
   @BeforeInsert()
   hashPassword() {
