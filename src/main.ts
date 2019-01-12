@@ -6,7 +6,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { EmmLogger } from './logger/logger';
 import { ValidationPipe } from '@nestjs/common';
-import { JwtAuthGuard } from './auth/guards/jwtAuth.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
