@@ -10,6 +10,9 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Trust proxy for getting client's IP
+  app.enable('trust proxy');
+
   // Register global providers
   app.useGlobalPipes(new ValidationPipe());
 

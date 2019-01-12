@@ -15,7 +15,7 @@ import { LoginRecordModule } from 'src/loginRecord/loginRecord.module';
     forwardRef(() => AuthModule),
     RoleModule,
     UserConfigModule,
-    LoginRecordModule
+    forwardRef(() => LoginRecordModule)
   ],
   controllers: [UserController],
   providers: [UserService, UserResolver],

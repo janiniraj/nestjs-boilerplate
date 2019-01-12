@@ -3,7 +3,7 @@ type LoginRecord {
   country: String!
   region: String!
   city: String!
-  lat: String!
-  long: String!
+  lat: Float!
+  long: Float!
   ip: String!
 }

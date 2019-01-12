@@ -7,6 +7,9 @@
 ☐ Users
   ✔ Authentication @done(19-01-11 00:43)
   ☐ Password reset
-  ☐ Login activity
-  ☐ User roles
-  ☐ User config
+  ☐ Two-factor auth
+  ✔ Login activity @done(19-01-12 15:23)
+  ✔ User roles @done(19-01-12 14:54)
+  ✔ User config @done(19-01-12 14:54)
+
+☐ Notifications

@@ -6,6 +6,7 @@ import { JwtStrategy } from './jwt.strategy';
 import { AuthController } from './auth.controller';
 import { UserModule } from 'src/user/user.module';
 import { AuthResolver } from './auth.resolver';
+import { LoginRecordModule } from 'src/loginRecord/loginRecord.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { AuthResolver } from './auth.resolver';
         expiresIn: '24h'
       }
     }),
-    forwardRef(() => UserModule)
+    forwardRef(() => UserModule),
+    LoginRecordModule
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, AuthResolver],

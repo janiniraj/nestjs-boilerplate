@@ -6,6 +6,7 @@ import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { UserDto } from './dtos/createUser.dto';
 import { EmmLogger } from 'src/logger/logger';
+import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 
 @Injectable()
 export class UserService {
@@ -43,6 +44,7 @@ export class UserService {
 
   async handleSuccessfulLogin(user: User) {
     user.lastLogin = new Date(dayjs().toISOString());
+
     await this.userRepository.save(user);
   }
 }

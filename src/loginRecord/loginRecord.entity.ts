@@ -25,10 +25,10 @@ export class LoginRecord {
   city: string;
 
   @Column()
-  lat: string;
+  lat: number;
 
   @Column()
-  long: string;
+  long: number;
 
   @Column()
   ip: string;

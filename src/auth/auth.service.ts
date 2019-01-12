@@ -7,6 +7,7 @@ import { JwtPayload } from './interfaces/jwtPayload.interface';
 import { EmmLogger } from 'src/logger/logger';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
+import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 
 @Injectable()
 export class AuthService {
