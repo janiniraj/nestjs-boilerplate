@@ -1,0 +1,9 @@
+type LoginRecord {
+  time: Date!
+  country: String!
+  region: String!
+  city: String!
+  lat: String!
+  long: String!
+  ip: String!
+}

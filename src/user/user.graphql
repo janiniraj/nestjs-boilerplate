@@ -10,6 +10,7 @@ type User {
   loginAttempts: Int!
   roles: [Role]
   configSettings: [UserConfig]
+  loginRecords: [LoginRecord]
 }
 
 type Query {
