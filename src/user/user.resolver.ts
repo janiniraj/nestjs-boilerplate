@@ -11,12 +11,12 @@ import { UseGuards } from '@nestjs/common';
 
 import { UserService } from './user.service';
 import { EmmLogger } from 'src/logger/logger';
-import { GqlAuthGuard } from 'src/common/guards/graphqlAuth.guard';
+import { GqlAuthGuard } from 'src/auth/guards/graphqlAuth.guard';
 import { RoleService } from 'src/role/role.service';
 import { User } from './user.entity';
-import { Roles } from 'src/common/decorators/roles.decorator';
+import { Roles } from 'src/role/decorators/roles.decorator';
 import { roles } from 'src/common/constants';
-import { GqlRolesGuard } from 'src/common/guards/graphqlRoles.guard';
+import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
 
 @Resolver('User')
 @UseGuards(GqlAuthGuard, GqlRolesGuard)

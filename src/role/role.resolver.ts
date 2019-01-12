@@ -2,9 +2,9 @@ import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { EmmLogger } from 'src/logger/logger';
 import { RoleService } from './role.service';
 import { UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from 'src/common/guards/graphqlAuth.guard';
-import { GqlRolesGuard } from 'src/common/guards/graphqlRoles.guard';
-import { Roles } from 'src/common/decorators/roles.decorator';
+import { GqlAuthGuard } from 'src/auth/guards/graphqlAuth.guard';
+import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
+import { Roles } from 'src/role/decorators/roles.decorator';
 import { roles } from 'src/common/constants';
 
 @Resolver('Role')

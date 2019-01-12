@@ -11,9 +11,9 @@ import { AuthGuard } from '@nestjs/passport';
 import { EmmLogger } from 'src/logger/logger';
 import { UserDto } from './dtos/createUser.dto';
 import { UserService } from './user.service';
-import { RolesGuard } from 'src/common/guards/roles.guard';
+import { RolesGuard } from 'src/role/guards/roles.guard';
 import { roles } from 'src/common/constants';
-import { Roles } from 'src/common/decorators/roles.decorator';
+import { Roles } from 'src/role/decorators/roles.decorator';
 
 @Controller('user')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
