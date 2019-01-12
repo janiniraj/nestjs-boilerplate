@@ -16,10 +16,10 @@ import { RoleService } from 'src/role/role.service';
 import { User } from './user.entity';
 import { Roles } from 'src/common/decorators/roles.decorator';
 import { roles } from 'src/common/constants';
-import { GraphqlRolesGuard } from 'src/common/guards/graphqlRoles.guard';
+import { GqlRolesGuard } from 'src/common/guards/graphqlRoles.guard';
 
 @Resolver('User')
-@UseGuards(GqlAuthGuard, GraphqlRolesGuard)
+@UseGuards(GqlAuthGuard, GqlRolesGuard)
 export class UserResolver {
   private readonly logger = new EmmLogger(UserResolver.name);
 

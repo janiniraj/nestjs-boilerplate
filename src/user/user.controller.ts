@@ -22,11 +22,6 @@ export class UserController {
 
   constructor(private readonly userService: UserService) {}
 
-  @Get()
-  async getUser() {
-    return await this.userService.findOneByEmail('test@kryptowire.com');
-  }
-
   @Post()
   @Roles(roles.ADMIN)
   async createUser(@Body(new ValidationPipe()) createUserDto: UserDto) {

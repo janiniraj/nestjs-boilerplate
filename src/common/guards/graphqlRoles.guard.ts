@@ -5,8 +5,8 @@ import { User } from 'src/user/user.entity';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
 @Injectable()
-export class GraphqlRolesGuard implements CanActivate {
-  private readonly logger = new EmmLogger(GraphqlRolesGuard.name);
+export class GqlRolesGuard implements CanActivate {
+  private readonly logger = new EmmLogger(GqlRolesGuard.name);
 
   constructor(private readonly reflector: Reflector) {}
 
