@@ -3,9 +3,7 @@ import {
   Post,
   Body,
   ValidationPipe,
-  UsePipes,
-  HttpException,
-  HttpStatus
+  UsePipes
 } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { EmmLogger } from 'src/logger/logger';
@@ -13,7 +11,6 @@ import { LoginDto } from './interfaces/login.dto';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
-@UsePipes(ValidationPipe)
 export class AuthController {
   private readonly logger = new EmmLogger(AuthController.name);
 
