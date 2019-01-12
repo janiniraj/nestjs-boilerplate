@@ -5,10 +5,12 @@ import {
   BeforeInsert,
   Unique,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from 'typeorm';
 import { IsEmail } from 'class-validator';
 import * as bcrypt from 'bcrypt';
+import { Role } from 'src/role/role.entity';
 
 @Entity()
 @Unique(['email'])
@@ -23,13 +25,13 @@ export class User {
   @Column()
   password: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 
-  @Column({ default: null })
+  @Column('timestamp', { default: null })
   lastLogin: Date;
 
   @Column({ default: null })
@@ -40,6 +42,9 @@ export class User {
 
   @Column({ default: false })
   locked: boolean;
+
+  @OneToMany((type) => Role, (role) => role.user)
+  roles: Role[];
 
   @BeforeInsert()
   hashPassword() {

@@ -16,6 +16,39 @@ export class AuthService {
     private readonly userService: UserService
   ) {}
 
+  async login(email: string, password: string) {
+    this.logger.log(`Logging user in: ${email}`);
+    const user = await this.userService.findOneByEmail(email);
+
+    // Email was invalid
+    if (!user) {
+      this.logger.warn(`User not found: ${email}`);
+      throw new HttpException(
+        'Invalid email/password',
+        HttpStatus.UNAUTHORIZED
+      );
+    }
+
+    // Account is locked
+    if (user.locked) {
+      this.logger.warn(`User attempted to login to locked account: ${email}`);
+      throw new HttpException('Account locked', HttpStatus.UNAUTHORIZED);
+    }
+
+    // Check password
+    if (!this.validatePassword(user, password)) {
+      await this.userService.handleInvalidPassword(user);
+      throw new HttpException(
+        'Invalid email/password',
+        HttpStatus.UNAUTHORIZED
+      );
+    }
+
+    await this.userService.handleSuccessfulLogin(user);
+
+    return this.createToken(user);
+  }
+
   async validateUser(payload: JwtPayload): Promise<any> {
     const user = await this.userService.findOneByEmail(payload.email);
     if (!user) {

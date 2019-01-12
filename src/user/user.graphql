@@ -1,0 +1,15 @@
+scalar Date
+
+type User {
+  id: ID!
+  email: String!
+  group: String!
+  createdAt: Date!
+  updatedAt: Date!
+  lastLogin: Date
+  loginAttempts: Int!
+}
+
+type Query {
+  user: User
+}

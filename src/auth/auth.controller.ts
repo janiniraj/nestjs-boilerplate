@@ -24,35 +24,6 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() { email, password }: LoginDto) {
-    this.logger.log(`Logging user in: ${email}`);
-    const user = await this.userService.findOneByEmail(email);
-
-    // Email was invalid
-    if (!user) {
-      this.logger.warn(`User not found: ${email}`);
-      throw new HttpException(
-        'Invalid email/password',
-        HttpStatus.UNAUTHORIZED
-      );
-    }
-
-    // Account is locked
-    if (user.locked) {
-      this.logger.warn(`User attempted to login to locked account: ${email}`);
-      throw new HttpException('Account locked', HttpStatus.UNAUTHORIZED);
-    }
-
-    // Check password
-    if (!this.authService.validatePassword(user, password)) {
-      await this.userService.handleInvalidPassword(user);
-      throw new HttpException(
-        'Invalid email/password',
-        HttpStatus.UNAUTHORIZED
-      );
-    }
-
-    await this.userService.handleSuccessfulLogin(user);
-
-    return this.authService.createToken(user);
+    return await this.authService.login(email, password);
   }
 }
