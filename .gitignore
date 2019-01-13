@@ -3,6 +3,7 @@ node_modules
 ormconfig.json
 .env
 ormconfig.json
+ormlogs.log
 
 logs/*.log
 dist

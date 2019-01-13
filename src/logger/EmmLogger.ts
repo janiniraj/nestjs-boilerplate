@@ -39,6 +39,10 @@ export class EmmLogger extends Logger {
     ]
   });
 
+  constructor(context: string) {
+    super(context);
+  }
+
   log(message: string) {
     EmmLogger.winstonLogger.log('debug', message);
     super.log(message);
