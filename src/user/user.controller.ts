@@ -14,9 +14,10 @@ import { UserService } from './user.service';
 import { RolesGuard } from 'src/role/guards/roles.guard';
 import { roles } from 'src/common/constants';
 import { Roles } from 'src/role/decorators/roles.decorator';
+import { JwtAuthGuard } from 'src/auth/guards/jwtAuth.guard';
 
 @Controller('user')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class UserController {
   private readonly logger = new EmmLogger(UserController.name);
 

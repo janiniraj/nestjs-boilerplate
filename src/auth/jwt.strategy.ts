@@ -21,9 +21,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: JwtPayload) {
     const user = await this.authService.validateUser(payload);
     if (!user) {
+      this.logger.debug(`Invalid/expired payload: ${JSON.stringify(payload)}`);
       throw new UnauthorizedException();
     }
-    // SessionMiddleware.set(SESSION_USER, user);
+    SessionMiddleware.set(SESSION_USER, user);
     return user;
   }
 }

@@ -1,5 +1,5 @@
 # Logging
-  ☐ Add silly level logging and separate file corresponding to that
+  ☐ Add exception interceptor to log to file
 
 # Users
   ☐ Password reset
@@ -9,6 +9,7 @@
 ☐ Notifications
 
 Archive:
+  ✔ Add silly level logging and separate file corresponding to that @done(19-01-13 15:33)
   ✔ Add logged in user email to log messages @done(19-01-13 14:28)
   ✔ Include namespace (classname) for winston logging just like normal Logger @done(19-01-13 14:14)
   ✔ Log SQL queries to separate file @done(19-01-13 14:14)

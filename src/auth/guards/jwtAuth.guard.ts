@@ -18,6 +18,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
   handleRequest(err, user, info) {
     if (err || !user) {
+      this.logger.debug(
+        `Invalid/expired access for user: ${JSON.stringify(user)}`
+      );
       throw err || new UnauthorizedException();
     }
     return user;
