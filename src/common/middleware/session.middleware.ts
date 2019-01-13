@@ -1,8 +1,8 @@
-import { Injectable, NestMiddleware } from '@nestjs/common';
 import * as cls from 'cls-hooked';
 import * as uniqid from 'uniqid';
-
 import { EMM_NAMESPACE, REQUEST_ID } from '../constants';
+import { Injectable, NestMiddleware } from '@nestjs/common';
+
 
 @Injectable()
 export class SessionMiddleware implements NestMiddleware {

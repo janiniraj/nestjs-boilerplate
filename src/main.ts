@@ -1,10 +1,9 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import { NestFactory } from '@nestjs/core';
-
 import { AppModule } from './app.module';
 import { EmmLogger } from './logger/EmmLogger';
+import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
@@ -18,6 +17,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   const port = process.env.PORT || 5000;
+
   logger.log(`Listening on port: ${port}`);
 
   await app.listen(port);

@@ -1,24 +1,24 @@
 import {
-  Resolver,
-  Query,
+  Args,
   Context,
-  ResolveProperty,
-  Parent,
   Mutation,
-  Args
-} from '@nestjs/graphql';
-import { UseGuards } from '@nestjs/common';
-
-import { UserService } from './user.service';
+  Parent,
+  Query,
+  ResolveProperty,
+  Resolver
+  } from '@nestjs/graphql';
 import { EmmLogger } from 'src/logger/EmmLogger';
 import { GqlAuthGuard } from 'src/auth/guards/graphqlAuth.guard';
-import { RoleService } from 'src/role/role.service';
-import { User } from './user.entity';
+import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
+import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 import { Roles } from 'src/role/decorators/roles.decorator';
 import { roles } from 'src/common/constants';
-import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
+import { RoleService } from 'src/role/role.service';
+import { UseGuards } from '@nestjs/common';
+import { User } from './user.entity';
 import { UserConfigService } from 'src/userConfig/userConfig.service';
-import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
+import { UserService } from './user.service';
+
 
 @Resolver('User')
 @UseGuards(GqlAuthGuard, GqlRolesGuard)
@@ -34,6 +34,7 @@ export class UserResolver {
 
   @Query()
   async user(@Context('req') { user }) {
+    this.logger.log(`Getting user info: ${user.email}`);
     return this.userService.findOneByEmail(user.email);
   }
 

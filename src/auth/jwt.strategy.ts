@@ -1,9 +1,11 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { PassportStrategy } from '@nestjs/passport';
-import { ExtractJwt, Strategy } from 'passport-jwt';
 import { AuthService } from './auth.service';
-import { JwtPayload } from './interfaces/jwtPayload.interface';
 import { EmmLogger } from 'src/logger/EmmLogger';
+import { ExtractJwt, Strategy } from 'passport-jwt';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtPayload } from './interfaces/jwtPayload.interface';
+import { PassportStrategy } from '@nestjs/passport';
+import { SESSION_USER } from 'src/common/constants';
+import { SessionMiddleware } from 'src/common/middleware/session.middleware';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -21,6 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UnauthorizedException();
     }
+    // SessionMiddleware.set(SESSION_USER, user);
     return user;
   }
 }

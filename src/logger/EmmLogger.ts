@@ -1,17 +1,19 @@
-import { Logger } from '@nestjs/common';
-import * as cls from 'cls-hooked';
-import * as winston from 'winston';
 import * as dayjs from 'dayjs';
+import * as winston from 'winston';
 import chalk from 'chalk';
-import { REQUEST_ID } from 'src/common/constants';
+import { Logger } from '@nestjs/common';
+import { REQUEST_ID, SESSION_USER } from 'src/common/constants';
 import { SessionMiddleware } from 'src/common/middleware/session.middleware';
+import { User } from 'src/user/user.entity';
 
 const formatter = (info) => {
   const requestId = SessionMiddleware.get(REQUEST_ID) || '-';
+  const user: User = SessionMiddleware.get(SESSION_USER);
+  const email = user ? user.email : '-';
 
   return `${dayjs(info.timestamp).format(
     'YYYY/MM/DD - hh:mm:ss.SSS A'
-  )} ${chalk.magentaBright(requestId)} [${info.level}] [${chalk.green(
+  )} ${chalk.magentaBright(requestId)} ${email} [${info.level}] [${chalk.green(
     info.context
   )}] ${info.message}`;
 };
