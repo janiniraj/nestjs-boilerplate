@@ -11,7 +11,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const status = exception.getStatus ? exception.getStatus() : 500;
 
     let message: string;
-    if (typeof exception.message === 'function') {
+    if (status === 500) {
+      message = 'Server error';
+    } else if (typeof exception.message === 'function') {
       message = exception.message();
     } else if (typeof exception.message === 'string') {
       message = exception.message;
@@ -19,7 +21,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
       message = 'Server error';
     }
 
-    console.log(JSON.stringify(exception));
     this.logger.error(message, exception.trace);
 
     // Log SQL messages

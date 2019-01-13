@@ -11,8 +11,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   private readonly logger = new EmmLogger(JwtAuthGuard.name);
 
   canActivate(context: ExecutionContext) {
-    // Add your custom authentication logic here
-    // for example, call super.logIn(request) to establish a session.
+    const req = context.switchToHttp().getRequest();
+    this.logger.debug(` REST ${req.method}, Path: ${req.path}`);
+
     return super.canActivate(context);
   }
 

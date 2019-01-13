@@ -18,6 +18,14 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new AllExceptionsFilter());
 
+  // Handle uncaught/unhandled exceptions
+  process.on('uncaughtException', (err) => {
+    logger.error(`Uncaught exception: ${err}`, err.stack);
+  });
+  process.on('unhandledRejection', (err) => {
+    logger.error(`Unhandled exception: ${err}`, err.stack);
+  });
+
   const port = process.env.PORT || 5000;
 
   logger.log(`Listening on port: ${port}`);
