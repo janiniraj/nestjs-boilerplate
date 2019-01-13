@@ -1,9 +1,9 @@
 import { ExceptionFilter, Catch, ArgumentsHost } from '@nestjs/common';
-import { EmmLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/EmmLogger';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
-  private readonly logger = new EmmLogger(AllExceptionsFilter.name);
+  private readonly logger = new BackendLogger(AllExceptionsFilter.name);
 
   catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp();

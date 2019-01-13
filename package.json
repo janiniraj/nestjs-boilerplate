@@ -1,7 +1,7 @@
 {
-  "name": "emm-portal-v3-server",
+  "name": "nestjs-boilerplate",
   "version": "0.0.1",
-  "description": "EMM portal backend for Kryptowire (v3).",
+  "description": "NestJS boilerplate",
   "author": "Brian Schulte",
   "license": "MIT",
   "scripts": {

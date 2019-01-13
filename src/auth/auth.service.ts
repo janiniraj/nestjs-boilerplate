@@ -4,14 +4,14 @@ import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 
 import { JwtPayload } from './interfaces/jwtPayload.interface';
-import { EmmLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/EmmLogger';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 
 @Injectable()
 export class AuthService {
-  private readonly logger = new EmmLogger(AuthService.name);
+  private readonly logger = new BackendLogger(AuthService.name);
 
   constructor(
     private readonly jwtService: JwtService,

@@ -1,11 +1,11 @@
 import { Injectable, ExecutionContext } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GqlExecutionContext } from '@nestjs/graphql';
-import { EmmLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/EmmLogger';
 
 @Injectable()
 export class GqlAuthGuard extends AuthGuard('jwt') {
-  private readonly logger = new EmmLogger(GqlAuthGuard.name);
+  private readonly logger = new BackendLogger(GqlAuthGuard.name);
 
   getRequest(context: ExecutionContext) {
     const ctx = GqlExecutionContext.create(context);

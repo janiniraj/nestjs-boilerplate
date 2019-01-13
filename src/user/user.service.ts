@@ -5,12 +5,12 @@ import * as dayjs from 'dayjs';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { UserDto } from './dtos/createUser.dto';
-import { EmmLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/EmmLogger';
 import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 
 @Injectable()
 export class UserService {
-  private readonly logger = new EmmLogger(UserService.name);
+  private readonly logger = new BackendLogger(UserService.name);
 
   constructor(
     @InjectRepository(User)

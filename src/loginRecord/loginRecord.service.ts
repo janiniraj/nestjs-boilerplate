@@ -3,13 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as geoip from 'geoip-lite';
 
 import { Repository } from 'typeorm';
-import { EmmLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/EmmLogger';
 import { LoginRecord } from './loginRecord.entity';
 import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class LoginRecordService {
-  private readonly logger = new EmmLogger(LoginRecordService.name);
+  private readonly logger = new BackendLogger(LoginRecordService.name);
 
   constructor(
     @InjectRepository(LoginRecord)

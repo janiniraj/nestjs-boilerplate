@@ -1,12 +1,12 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { EmmLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/EmmLogger';
 import { User } from 'src/user/user.entity';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
 @Injectable()
 export class GqlRolesGuard implements CanActivate {
-  private readonly logger = new EmmLogger(GqlRolesGuard.name);
+  private readonly logger = new BackendLogger(GqlRolesGuard.name);
 
   constructor(private readonly reflector: Reflector) {}
 

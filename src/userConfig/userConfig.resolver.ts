@@ -5,12 +5,12 @@ import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
 import { UserConfigService } from './userConfig.service';
 import { Roles } from 'src/role/decorators/roles.decorator';
 import { roles } from 'src/common/constants';
-import { EmmLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/EmmLogger';
 
 @Resolver('UserConfig')
 @UseGuards(GqlAuthGuard, GqlRolesGuard)
 export class UserConfigResolver {
-  private readonly logger = new EmmLogger(UserConfigResolver.name);
+  private readonly logger = new BackendLogger(UserConfigResolver.name);
 
   constructor(private readonly userConfigService: UserConfigService) {}
 

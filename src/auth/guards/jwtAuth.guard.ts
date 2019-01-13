@@ -4,11 +4,11 @@ import {
   UnauthorizedException
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { EmmLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/EmmLogger';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
-  private readonly logger = new EmmLogger(JwtAuthGuard.name);
+  private readonly logger = new BackendLogger(JwtAuthGuard.name);
 
   canActivate(context: ExecutionContext) {
     const req = context.switchToHttp().getRequest();

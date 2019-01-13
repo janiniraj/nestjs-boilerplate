@@ -1,12 +1,12 @@
 import { Resolver, Mutation, Args, Context } from '@nestjs/graphql';
-import { EmmLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/EmmLogger';
 import { AuthService } from './auth.service';
 import { UserService } from 'src/user/user.service';
 import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 
 @Resolver('Auth')
 export class AuthResolver {
-  private readonly logger = new EmmLogger(AuthResolver.name);
+  private readonly logger = new BackendLogger(AuthResolver.name);
 
   constructor(
     private readonly authService: AuthService,

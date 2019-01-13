@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-import { EmmLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/EmmLogger';
 import { UserDto } from './dtos/createUser.dto';
 import { UserService } from './user.service';
 import { RolesGuard } from 'src/role/guards/roles.guard';
@@ -19,7 +19,7 @@ import { JwtAuthGuard } from 'src/auth/guards/jwtAuth.guard';
 @Controller('user')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class UserController {
-  private readonly logger = new EmmLogger(UserController.name);
+  private readonly logger = new BackendLogger(UserController.name);
 
   constructor(private readonly userService: UserService) {}
 

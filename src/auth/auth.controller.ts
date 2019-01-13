@@ -7,14 +7,14 @@ import {
   Req
 } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
-import { EmmLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/EmmLogger';
 import { LoginDto } from './interfaces/login.dto';
 import { AuthService } from './auth.service';
 import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 
 @Controller('auth')
 export class AuthController {
-  private readonly logger = new EmmLogger(AuthController.name);
+  private readonly logger = new BackendLogger(AuthController.name);
 
   constructor(
     private readonly userService: UserService,

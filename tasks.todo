@@ -1,5 +1,4 @@
 # Logging
-  ☐ Log the beginning of each controller/resolver action
 
 # Users
   ☐ Password reset
@@ -9,6 +8,7 @@
 ☐ Notifications
 
 Archive:
+  ✔ Log the beginning of each controller/resolver action @done(19-01-13 16:38)
   ✔ Add exception interceptor to log to file @done(19-01-13 15:53)
   ✔ Add silly level logging and separate file corresponding to that @done(19-01-13 15:33)
   ✔ Add logged in user email to log messages @done(19-01-13 14:28)

@@ -1,5 +1,5 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
-import { EmmLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/EmmLogger';
 import { RoleService } from './role.service';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/auth/guards/graphqlAuth.guard';
@@ -10,7 +10,7 @@ import { roles } from 'src/common/constants';
 @Resolver('Role')
 @UseGuards(GqlAuthGuard, GqlRolesGuard)
 export class RoleResolver {
-  private readonly logger = new EmmLogger(RoleResolver.name);
+  private readonly logger = new BackendLogger(RoleResolver.name);
 
   constructor(private readonly roleService: RoleService) {}
 

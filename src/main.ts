@@ -2,14 +2,14 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import { AppModule } from './app.module';
-import { EmmLogger } from './logger/EmmLogger';
+import { BackendLogger } from './logger/EmmLogger';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AllExceptionsFilter } from './common/exceptions/AllExceptionsFilter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const logger = new EmmLogger('Main.ts');
+  const logger = new BackendLogger('Main.ts');
 
   // Trust proxy for getting client's IP
   app.enable('trust proxy');

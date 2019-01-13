@@ -1,4 +1,4 @@
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import * as winston from 'winston';
 import chalk from 'chalk';
 import { Logger } from '@nestjs/common';
@@ -25,7 +25,7 @@ const customFormat = winston.format.combine(
   winston.format.printf((info) => formatter(info))
 );
 
-export class EmmLogger extends Logger {
+export class BackendLogger extends Logger {
   public static winstonLogger = winston.createLogger({
     level: 'silly',
     format: customFormat,
@@ -101,6 +101,11 @@ export class EmmLogger extends Logger {
     level: 'silly' | 'verbose' | 'debug' | 'warn' | 'error',
     trace?: string
   ) {
-    EmmLogger.winstonLogger.log({ level, message, trace, context: this.ctx });
+    BackendLogger.winstonLogger.log({
+      level,
+      message,
+      trace,
+      context: this.ctx
+    });
   }
 }
