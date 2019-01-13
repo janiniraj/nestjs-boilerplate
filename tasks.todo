@@ -1,7 +1,8 @@
 # Functionality agnostic to the EMM portal (applicable to boilerplate)
-☐ Misc
-  ☐ Logging to file
-  ☐ Log unique ID for each request
+☐ Logging
+  ☐ Add logged in user email to log messages
+  ☐ Include namespace (classname) for winston logging just like normal Logger
+  ☐ Log SQL queries to separate file
 
 ☐ Users
   ☐ Password reset
@@ -10,6 +11,8 @@
 ☐ Notifications
 
 Archive:
+  ✔ Log unique ID for each request @done(19-01-13 13:49)
+  ✔ Logging to file @done(19-01-12 17:28)
   ✔ Authentication @done(19-01-11 00:43)
   ✔ Login activity @done(19-01-12 15:23)
   ✔ User roles @done(19-01-12 14:54)

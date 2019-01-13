@@ -9,6 +9,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const logger = new EmmLogger('Main.ts');
 
   // Trust proxy for getting client's IP
   app.enable('trust proxy');
@@ -17,7 +18,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   const port = process.env.PORT || 5000;
-  EmmLogger.log(`Listening on port: ${port}`, 'Main');
+  logger.log(`Listening on port: ${port}`);
 
   await app.listen(port);
 }

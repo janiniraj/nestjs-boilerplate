@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { UserConfigModule } from './userConfig/userConfig.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { DateScalar } from './common/scalars/date.scalar';
 import { RoleModule } from './role/role.module';
+import { SessionMiddleware } from './common/middleware/session.middleware';
 
 @Module({
   imports: [
@@ -24,4 +25,8 @@ import { RoleModule } from './role/role.module';
   controllers: [],
   providers: []
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(SessionMiddleware).forRoutes('*');
+  }
+}
