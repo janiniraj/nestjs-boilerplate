@@ -73,9 +73,4 @@ export class AuthService {
       accessToken
     };
   }
-
-  async validateToken(token: string) {
-    this.logger.log(`Verifying token: ${token}`);
-    return jwt.verify(token.split(' ')[1], process.env.APP_KEY);
-  }
 }

@@ -21,7 +21,7 @@ export class RoleResolver {
     @Args('name') name: string,
     @Args('enabled') enabled: boolean
   ) {
-    this.logger.log(`Creating role ${name} for user ${userId}`);
+    this.logger.debug(`Creating role ${name} for user ${userId}`);
 
     return await this.roleService.createRole({ userId, name, enabled });
   }

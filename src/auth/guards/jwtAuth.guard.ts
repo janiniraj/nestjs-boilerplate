@@ -11,7 +11,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   private readonly logger = new EmmLogger(JwtAuthGuard.name);
 
   canActivate(context: ExecutionContext) {
-    this.logger.log('Verifying user');
     // Add your custom authentication logic here
     // for example, call super.logIn(request) to establish a session.
     return super.canActivate(context);

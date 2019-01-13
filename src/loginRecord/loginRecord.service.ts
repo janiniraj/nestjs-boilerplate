@@ -22,7 +22,7 @@ export class LoginRecordService {
 
     const locationInfo = geoip.lookup(ip);
     if (!locationInfo) {
-      this.logger.log('Could not find location info for user IP');
+      this.logger.warn('Could not find location info for user IP');
       return;
     }
     const { country, region, city } = locationInfo;

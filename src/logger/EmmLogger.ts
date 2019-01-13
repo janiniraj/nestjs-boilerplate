@@ -32,12 +32,33 @@ export class EmmLogger extends Logger {
     transports: [
       new winston.transports.File({
         filename: 'logs/server.tail.log',
-        tailable: true
+        tailable: true,
+        level: 'verbose',
+        maxFiles: 10,
+        maxsize: 5 * 1024 * 1024 // 5 MB
+      }),
+      new winston.transports.File({
+        filename: 'logs/serverAll.tail.log',
+        tailable: true,
+        level: 'silly',
+        maxFiles: 10,
+        maxsize: 5 * 1024 * 1024 // 5 MB
       }),
       new winston.transports.File({
         filename: 'logs/server.log',
         format: winston.format.combine(winston.format.uncolorize()),
-        tailable: false
+        tailable: false,
+        level: 'verbose',
+        maxFiles: 10,
+        maxsize: 5 * 1024 * 1024 // 5 MB
+      }),
+      new winston.transports.File({
+        filename: 'logs/serverAll.log',
+        format: winston.format.combine(winston.format.uncolorize()),
+        tailable: false,
+        level: 'silly',
+        maxFiles: 10,
+        maxsize: 5 * 1024 * 1024 // 5 MB
       })
     ]
   });
@@ -50,8 +71,18 @@ export class EmmLogger extends Logger {
     this.ctx = context;
   }
 
-  log(message: string) {
+  silly(message: string) {
+    this.winstonLog(message, 'silly');
+    super.log(message);
+  }
+
+  debug(message: string) {
     this.winstonLog(message, 'debug');
+    super.log(message);
+  }
+
+  log(message: string) {
+    this.winstonLog(message, 'verbose');
     super.log(message);
   }
 
@@ -67,7 +98,7 @@ export class EmmLogger extends Logger {
 
   winstonLog(
     message: string,
-    level: 'debug' | 'warn' | 'error',
+    level: 'silly' | 'verbose' | 'debug' | 'warn' | 'error',
     trace?: string
   ) {
     EmmLogger.winstonLogger.log({ level, message, trace, context: this.ctx });

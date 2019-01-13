@@ -6,7 +6,7 @@ import {
   Query,
   ResolveProperty,
   Resolver
-  } from '@nestjs/graphql';
+} from '@nestjs/graphql';
 import { EmmLogger } from 'src/logger/EmmLogger';
 import { GqlAuthGuard } from 'src/auth/guards/graphqlAuth.guard';
 import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
@@ -18,7 +18,6 @@ import { UseGuards } from '@nestjs/common';
 import { User } from './user.entity';
 import { UserConfigService } from 'src/userConfig/userConfig.service';
 import { UserService } from './user.service';
-
 
 @Resolver('User')
 @UseGuards(GqlAuthGuard, GqlRolesGuard)
@@ -34,7 +33,7 @@ export class UserResolver {
 
   @Query()
   async user(@Context('req') { user }) {
-    this.logger.log(`Getting user info: ${user.email}`);
+    this.logger.debug(`Getting user info: ${user.email}`);
     return this.userService.findOneByEmail(user.email);
   }
 
