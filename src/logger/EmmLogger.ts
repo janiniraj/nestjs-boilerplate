@@ -11,12 +11,13 @@ const formatter = (info) => {
 
   return `${dayjs(info.timestamp).format(
     'YYYY/MM/DD - hh:mm:ss.SSS A'
-  )} ${chalk.magentaBright(requestId)} [${info.level}] ${info.message}`;
+  )} ${chalk.magentaBright(requestId)} [${info.level}] [${chalk.green(
+    info.context
+  )}] ${info.message}`;
 };
 
 const customFormat = winston.format.combine(
   winston.format.colorize(),
-  winston.format.padLevels(),
   winston.format.timestamp(),
   winston.format.prettyPrint(),
   winston.format.printf((info) => formatter(info))
@@ -39,22 +40,34 @@ export class EmmLogger extends Logger {
     ]
   });
 
+  private ctx: string;
+
   constructor(context: string) {
     super(context);
+
+    this.ctx = context;
   }
 
   log(message: string) {
-    EmmLogger.winstonLogger.log('debug', message);
+    this.winstonLog(message, 'debug');
     super.log(message);
   }
 
   warn(message: string) {
-    EmmLogger.winstonLogger.log('warn', message);
+    this.winstonLog(message, 'warn');
     super.warn(message);
   }
 
   error(message: string, trace: string) {
-    EmmLogger.winstonLogger.log('error', message);
+    this.winstonLog(message, 'error', trace);
     super.error(message, trace);
+  }
+
+  winstonLog(
+    message: string,
+    level: 'debug' | 'warn' | 'error',
+    trace?: string
+  ) {
+    EmmLogger.winstonLogger.log({ level, message, trace, context: this.ctx });
   }
 }
