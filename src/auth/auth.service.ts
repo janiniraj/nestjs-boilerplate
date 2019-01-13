@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 
 import { JwtPayload } from './interfaces/jwtPayload.interface';
-import { BackendLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 import { LoginRecordService } from 'src/loginRecord/loginRecord.service';

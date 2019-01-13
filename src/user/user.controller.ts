@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-import { BackendLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 import { UserDto } from './dtos/createUser.dto';
 import { UserService } from './user.service';
 import { RolesGuard } from 'src/role/guards/roles.guard';

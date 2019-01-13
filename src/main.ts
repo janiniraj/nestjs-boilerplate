@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import { AppModule } from './app.module';
-import { BackendLogger } from './logger/EmmLogger';
+import { BackendLogger } from './logger/BackendLogger';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AllExceptionsFilter } from './common/exceptions/AllExceptionsFilter';

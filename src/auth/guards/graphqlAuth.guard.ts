@@ -1,7 +1,7 @@
 import { Injectable, ExecutionContext } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GqlExecutionContext } from '@nestjs/graphql';
-import { BackendLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 
 @Injectable()
 export class GqlAuthGuard extends AuthGuard('jwt') {

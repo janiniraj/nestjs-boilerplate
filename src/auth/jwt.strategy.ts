@@ -1,5 +1,5 @@
 import { AuthService } from './auth.service';
-import { BackendLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtPayload } from './interfaces/jwtPayload.interface';

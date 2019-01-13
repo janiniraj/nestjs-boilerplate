@@ -4,7 +4,7 @@ import {
   UnauthorizedException
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { BackendLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {

@@ -5,7 +5,7 @@ import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
 import { UserConfigService } from './userConfig.service';
 import { Roles } from 'src/role/decorators/roles.decorator';
 import { roles } from 'src/common/constants';
-import { BackendLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 
 @Resolver('UserConfig')
 @UseGuards(GqlAuthGuard, GqlRolesGuard)

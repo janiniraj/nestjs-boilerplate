@@ -1,5 +1,5 @@
 import { ExceptionFilter, Catch, ArgumentsHost } from '@nestjs/common';
-import { BackendLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {

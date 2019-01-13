@@ -1,5 +1,5 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
-import { BackendLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 import { RoleService } from './role.service';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/auth/guards/graphqlAuth.guard';

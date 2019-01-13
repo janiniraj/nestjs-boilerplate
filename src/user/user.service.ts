@@ -5,7 +5,7 @@ import * as dayjs from 'dayjs';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { UserDto } from './dtos/createUser.dto';
-import { BackendLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 
 @Injectable()

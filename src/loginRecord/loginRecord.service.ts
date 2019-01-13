@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as geoip from 'geoip-lite';
 
 import { Repository } from 'typeorm';
-import { BackendLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 import { LoginRecord } from './loginRecord.entity';
 import { UserService } from 'src/user/user.service';
 

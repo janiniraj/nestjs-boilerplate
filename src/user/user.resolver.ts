@@ -7,7 +7,7 @@ import {
   ResolveProperty,
   Resolver
 } from '@nestjs/graphql';
-import { BackendLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 import { GqlAuthGuard } from 'src/auth/guards/graphqlAuth.guard';
 import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
 import { LoginRecordService } from 'src/loginRecord/loginRecord.service';

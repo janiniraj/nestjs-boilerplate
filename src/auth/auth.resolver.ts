@@ -1,5 +1,5 @@
 import { Resolver, Mutation, Args, Context } from '@nestjs/graphql';
-import { BackendLogger } from 'src/logger/EmmLogger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 import { AuthService } from './auth.service';
 import { UserService } from 'src/user/user.service';
 import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
