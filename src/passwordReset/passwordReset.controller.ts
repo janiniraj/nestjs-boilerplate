@@ -1,16 +1,9 @@
-import {
-  Controller,
-  Post,
-  Body,
-  ValidationPipe,
-  UsePipes,
-  Put,
-  Patch
-} from '@nestjs/common';
+import { Controller, Post, Body, Patch } from '@nestjs/common';
 
 import { BackendLogger } from 'src/logger/BackendLogger';
-import { ResetDto } from './dtos/reset.dto';
+import { CreateResetDto } from './dtos/createReset.dto';
 import { PasswordResetService } from './passwordReset.service';
+import { ResetDto } from './dtos/reset.dto';
 
 @Controller('password-reset')
 export class PasswordResetController {
@@ -22,7 +15,7 @@ export class PasswordResetController {
   async createPasswordReset(@Body()
   {
     email
-  }: ResetDto) {
+  }: CreateResetDto) {
     return await this.passwordResetService.createPasswordResetToken(email);
   }
 
@@ -33,12 +26,7 @@ export class PasswordResetController {
     newPasswordDupe,
     token,
     email
-  }: {
-    newPassword: string;
-    newPasswordDupe: string;
-    token: string;
-    email: string;
-  }) {
+  }: ResetDto) {
     return await this.passwordResetService.resetPassword(
       email,
       token,

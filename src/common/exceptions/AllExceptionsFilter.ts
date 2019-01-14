@@ -17,8 +17,17 @@ export class AllExceptionsFilter implements ExceptionFilter {
       message = exception.message();
     } else if (typeof exception.message === 'string') {
       message = exception.message;
+    } else if (Array.isArray(exception.message)) {
+      message = exception.message.join(', ');
     } else {
       message = 'Server error';
+    }
+
+    let trace = '';
+    if (exception.trace) {
+      trace = exception.trace;
+    } else if (exception.stack) {
+      trace = exception.stack;
     }
 
     this.logger.error(exception.message, exception.trace);

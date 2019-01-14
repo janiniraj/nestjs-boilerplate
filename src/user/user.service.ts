@@ -24,11 +24,6 @@ export class UserService {
     });
   }
 
-  async findOneByToken(token: string) {
-    const tokenHash = bcrypt.hashSync(token, 10);
-    return await this.userRepository.findOne({ resetToken: tokenHash });
-  }
-
   async save(user: User) {
     return await this.userRepository.save(user);
   }
@@ -53,6 +48,7 @@ export class UserService {
 
   async handleSuccessfulLogin(user: User) {
     user.lastLogin = new Date(dayjs().toISOString());
+    user.loginAttempts = 0;
 
     await this.userRepository.save(user);
   }

@@ -26,7 +26,7 @@ async function bootstrap() {
 
   // Register global providers
   app.useGlobalPipes(new ValidationPipe());
-  app.useGlobalFilters(new AllExceptionsFilter());
+  // app.useGlobalFilters(new AllExceptionsFilter());
 
   // Handle uncaught/unhandled exceptions
   process.on('uncaughtException', (err) => {

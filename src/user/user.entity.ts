@@ -6,7 +6,8 @@ import {
   Unique,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany
+  OneToMany,
+  BeforeUpdate
 } from 'typeorm';
 import { IsEmail } from 'class-validator';
 import * as bcrypt from 'bcrypt';

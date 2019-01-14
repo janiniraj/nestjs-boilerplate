@@ -6,6 +6,7 @@ import { BackendLogger } from 'src/logger/BackendLogger';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
+import { loggers } from 'winston';
 
 @Injectable()
 export class PasswordResetService {
@@ -32,7 +33,7 @@ export class PasswordResetService {
       .toDate();
     this.userService.save(user);
 
-    return true;
+    return;
   }
 
   async resetPassword(
@@ -41,14 +42,21 @@ export class PasswordResetService {
     newPassword: string,
     newPasswordDupe: string
   ) {
-    const user: User = await this.userService.findOneByToken(token);
+    const user: User = await this.userService.findOneByEmail(email);
+    this.logger.debug(`Attempting to reset password for: ${user.email}`);
     if (!user) {
       this.logger.warn('Invalid token provided for password reset');
       throw new HttpException('Invalid token', HttpStatus.BAD_REQUEST);
     }
+    if (!user.resetToken) {
+      this.logger.warn(
+        `User does not have password reset token: ${user.email}`
+      );
+      throw new HttpException('Invalid token', HttpStatus.BAD_REQUEST);
+    }
 
     // Check if the token has expired
-    this.validateTokenTiming(user);
+    this.validateToken(token, user);
 
     // Check if the new password and its repeated value are the same
     this.validateSamePassword(newPassword, newPasswordDupe, user);
@@ -57,7 +65,9 @@ export class PasswordResetService {
     this.validatePasswordStrength(newPassword, user);
 
     // Update the password
-    user.password = newPassword;
+    user.password = bcrypt.hashSync(newPassword, 10);
+    user.resetToken = null;
+    user.resetTokenExpires = null;
     await this.userService.save(user);
   }
 
@@ -68,7 +78,7 @@ export class PasswordResetService {
         `Non-strong password entered for new password, user: ${user.email}`
       );
       throw new HttpException(
-        `Invalid new password, errors: ${passTestResult.errors.join(', ')}`,
+        `Invalid new password, errors: ${passTestResult.errors.join(' ')}`,
         HttpStatus.BAD_REQUEST
       );
     }
@@ -87,7 +97,15 @@ export class PasswordResetService {
     }
   }
 
-  private validateTokenTiming(user: User) {
+  private validateToken(token: string, user: User) {
+    const isCorrectToken = bcrypt.compareSync(token, user.resetToken);
+    if (!isCorrectToken) {
+      this.logger.warn(
+        `User entered invalid token for password reset: ${user.email}`
+      );
+      throw new HttpException('Invalid token', HttpStatus.BAD_REQUEST);
+    }
+
     const timeDiff = dayjs(user.resetTokenExpires).diff(dayjs(), 'second');
     if (timeDiff < 0) {
       this.logger.warn(`Token has expired for user: ${user.email}`);
