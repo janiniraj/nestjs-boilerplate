@@ -5,5 +5,6 @@ export class SendDto {
   from: string;
   title: string;
   subject: string;
-  body: string;
+  snippet: string;
+  params: any;
 }

@@ -6,13 +6,17 @@ import { BackendLogger } from 'src/logger/BackendLogger';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
-import { loggers } from 'winston';
+import { EmailerService } from 'src/emailer/emailer.service';
+import { EMAIL_FROM } from 'src/common/constants';
 
 @Injectable()
 export class PasswordResetService {
   private readonly logger = new BackendLogger(PasswordResetService.name);
 
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly emailerService: EmailerService
+  ) {}
 
   async createPasswordResetToken(email: string) {
     this.logger.log(`Password reset requested for email: ${email}`);
@@ -26,12 +30,17 @@ export class PasswordResetService {
 
     const token = randToken.generate(36);
     // TODO: REMOVE ME
+    this.logger.debug(`Token: ${token}`);
+
     this.logger.log(`Token created: ${token}`);
+
     user.resetToken = bcrypt.hashSync(token, 10);
     user.resetTokenExpires = dayjs()
       .add(2, 'hour')
       .toDate();
     this.userService.save(user);
+
+    await this.sendPasswordResetEmail(user, token);
 
     return;
   }
@@ -111,5 +120,18 @@ export class PasswordResetService {
       this.logger.warn(`Token has expired for user: ${user.email}`);
       throw new HttpException('Expired token', HttpStatus.BAD_REQUEST);
     }
+  }
+
+  private async sendPasswordResetEmail(user: User, generatedToken: string) {
+    await this.emailerService.send({
+      subject: '[Kryptowire EMM] Password Reset',
+      title: 'Password Reset',
+      to: [user.email],
+      from: EMAIL_FROM,
+      snippet: 'password-reset',
+      params: {
+        token: generatedToken
+      }
+    });
   }
 }
