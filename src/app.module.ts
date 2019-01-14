@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { DateScalar } from './common/scalars/date.scalar';
 import { RoleModule } from './role/role.module';
 import { SessionMiddleware } from './common/middleware/session.middleware';
+import { PasswordResetModule } from './passwordReset/passwordReset.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { SessionMiddleware } from './common/middleware/session.middleware';
     UserModule,
     AuthModule,
     RoleModule,
-    UserConfigModule
+    UserConfigModule,
+    PasswordResetModule
   ],
   controllers: [],
   providers: []

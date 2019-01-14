@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
+import * as owasp from 'owasp-password-strength-test';
 
 import { AppModule } from './app.module';
 import { BackendLogger } from './logger/BackendLogger';
@@ -13,6 +14,15 @@ async function bootstrap() {
 
   // Trust proxy for getting client's IP
   app.enable('trust proxy');
+
+  // Configure any globally configured modules
+  owasp.config({
+    allowPassphrases: true,
+    maxLength: 128,
+    minLength: 10,
+    minPhraseLength: 20,
+    minOptionalTestsToPass: 3
+  });
 
   // Register global providers
   app.useGlobalPipes(new ValidationPipe());

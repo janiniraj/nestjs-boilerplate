@@ -17,7 +17,7 @@ import { Roles } from 'src/role/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwtAuth.guard';
 
 @Controller('user')
-@UseGuards(JwtAuthGuard, RolesGuard)
+@UseGuards(RolesGuard)
 export class UserController {
   private readonly logger = new BackendLogger(UserController.name);
 
@@ -25,6 +25,7 @@ export class UserController {
 
   @Post()
   @Roles(roles.ADMIN)
+  @UseGuards(JwtAuthGuard)
   async createUser(@Body(new ValidationPipe()) createUserDto: UserDto) {
     this.logger.log(`Creating new user: ${createUserDto.email}`);
     return await this.userService.createUser(createUserDto);

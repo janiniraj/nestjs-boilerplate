@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import { formatWithOptions } from 'util';
 
 (() => {
   const name: string = process.argv[2];
@@ -29,16 +30,16 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
-import { EmmLogger } from 'src/logger/logger';
+import { BackendLogger } from 'src/logger/logger';
 import { ${uppercaseName} } from './${name}.entity';
 
 @Injectable()
 export class ${uppercaseName}Service {
-  private readonly logger = new EmmLogger(${uppercaseName}Service.name);
+  private readonly logger = new BackendLogger(${uppercaseName}Service.name);
 
   constructor(
     @InjectRepository(${uppercaseName})
-    private readonly userRepository: Repository<${uppercaseName}>
+    private readonly ${name}Repository: Repository<${uppercaseName}>
   ) {}
 }`;
 
@@ -56,18 +57,47 @@ import { Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { ${uppercaseName}Service } from './${name}.service';
-import { EmmLogger } from 'src/logger/logger';
+import { BackendLogger } from 'src/logger/logger';
 import { GqlAuthGuard } from 'src/auth/guards/graphqlAuth.guard';
 import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
 
-@Resolver('User')
+@Resolver('${uppercaseName}')
 @UseGuards(GqlAuthGuard, GqlRolesGuard)
 export class ${uppercaseName}Resolver {
-  private readonly logger = new EmmLogger(${uppercaseName}Resolver.name);
+  private readonly logger = new BackendLogger(${uppercaseName}Resolver.name);
 
   constructor(private readonly ${name}Service: ${uppercaseName}Service) {}
 }`;
   fs.writeFileSync(dir + '/' + name + '.resolver.ts', resolver);
+
+  // Controller
+
+  const controller = `
+import {
+  Controller,
+  Post,
+  Body,
+  ValidationPipe,
+  UseGuards,
+  Get
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
+import { BackendLogger } from 'src/logger/BackendLogger';
+import { ${uppercaseName}Service } from './${name}.service';
+import { RolesGuard } from 'src/role/guards/roles.guard';
+import { roles } from 'src/common/constants';
+import { Roles } from 'src/role/decorators/roles.decorator';
+import { JwtAuthGuard } from 'src/auth/guards/jwtAuth.guard';
+
+@Controller('${name}')
+@UseGuards(RolesGuard)
+export class ${uppercaseName}Controller {
+  private readonly logger = new BackendLogger(${uppercaseName}Controller.name);
+
+  constructor(private readonly ${name}Service: ${uppercaseName}Service) {}
+}`;
+  fs.writeFileSync(dir + '/' + name + '.controller.ts', controller);
 
   // Module
   const module = `
@@ -76,10 +106,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ${uppercaseName} } from './${name}.entity';
 import { ${uppercaseName}Service } from './${name}.service';
 import { ${uppercaseName}Resolver } from './${name}.resolver';
+import { ${uppercaseName}Controller } from './${name}.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([${uppercaseName}])],
-  controllers: [],
+  controllers: [${uppercaseName}Controller],
   providers: [${uppercaseName}Service, ${uppercaseName}Resolver],
   exports: [${uppercaseName}Service]
 })

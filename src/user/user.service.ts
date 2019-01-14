@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as dayjs from 'dayjs';
+import * as bcrypt from 'bcrypt';
 
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { UserDto } from './dtos/createUser.dto';
 import { BackendLogger } from 'src/logger/BackendLogger';
-import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 
 @Injectable()
 export class UserService {
@@ -22,6 +22,15 @@ export class UserService {
       where: { email },
       relations: ['roles']
     });
+  }
+
+  async findOneByToken(token: string) {
+    const tokenHash = bcrypt.hashSync(token, 10);
+    return await this.userRepository.findOne({ resetToken: tokenHash });
+  }
+
+  async save(user: User) {
+    return await this.userRepository.save(user);
   }
 
   async createUser(createUserDto: UserDto): Promise<User> {

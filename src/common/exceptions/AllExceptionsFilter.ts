@@ -10,7 +10,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const response = ctx.getResponse();
     const status = exception.getStatus ? exception.getStatus() : 500;
 
-    let message: string;
+    let message: any;
     if (status === 500) {
       message = 'Server error';
     } else if (typeof exception.message === 'function') {
@@ -21,14 +21,14 @@ export class AllExceptionsFilter implements ExceptionFilter {
       message = 'Server error';
     }
 
-    this.logger.error(message, exception.trace);
+    this.logger.error(exception.message, exception.trace);
 
     // Log SQL messages
     if (exception.sql) {
       this.logger.error(`On SQL query: ${exception.sql}`, '');
       if (exception.parameters) {
         this.logger.error(
-          `With params: ${exception.parameters.join(', ')}`,
+          `With params: ${JSON.stringify(exception.parameters)}`,
           ''
         );
       }

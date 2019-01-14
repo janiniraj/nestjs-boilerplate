@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs';
 import * as winston from 'winston';
 import chalk from 'chalk';
 import { Logger } from '@nestjs/common';

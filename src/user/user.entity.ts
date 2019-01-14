@@ -45,6 +45,12 @@ export class User {
   @Column({ default: false })
   locked: boolean;
 
+  @Column({ default: null })
+  resetToken: string;
+
+  @Column({ default: null })
+  resetTokenExpires: Date;
+
   @OneToMany((type) => Role, (role) => role.user)
   roles: Role[];
 
