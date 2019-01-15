@@ -29,8 +29,6 @@ export class PasswordResetService {
     }
 
     const token = randToken.generate(36);
-    // TODO: REMOVE ME
-    this.logger.debug(`Token: ${token}`);
 
     this.logger.log(`Token created: ${token}`);
 
@@ -78,6 +76,8 @@ export class PasswordResetService {
     user.resetToken = null;
     user.resetTokenExpires = null;
     await this.userService.save(user);
+
+    this.logger.log(`Reset password successfully for user: ${user.email}`);
   }
 
   private validatePasswordStrength(newPassword: string, user: User) {

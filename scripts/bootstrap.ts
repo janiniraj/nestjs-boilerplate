@@ -30,7 +30,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
-import { BackendLogger } from 'src/logger/logger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 import { ${uppercaseName} } from './${name}.entity';
 
 @Injectable()
@@ -57,7 +57,7 @@ import { Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { ${uppercaseName}Service } from './${name}.service';
-import { BackendLogger } from 'src/logger/logger';
+import { BackendLogger } from 'src/logger/BackendLogger';
 import { GqlAuthGuard } from 'src/auth/guards/graphqlAuth.guard';
 import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
 

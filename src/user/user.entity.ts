@@ -14,6 +14,7 @@ import * as bcrypt from 'bcrypt';
 import { Role } from 'src/role/role.entity';
 import { UserConfig } from 'src/userConfig/userConfig.entity';
 import { LoginRecord } from 'src/loginRecord/loginRecord.entity';
+import { NotificationStatus } from 'src/notificationStatus/notificationStatus.entity';
 
 @Entity()
 @Unique(['email'])
@@ -60,6 +61,12 @@ export class User {
 
   @OneToMany((type) => LoginRecord, (loginRecord) => loginRecord.user)
   loginRecords: LoginRecord[];
+
+  @OneToMany(
+    (type) => NotificationStatus,
+    (notificationStatus) => notificationStatus.user
+  )
+  notifications: NotificationStatus[];
 
   @BeforeInsert()
   hashPassword() {

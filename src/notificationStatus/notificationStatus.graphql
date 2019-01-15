@@ -1,0 +1,17 @@
+type NotificationStatus {
+  status: String!
+  uuid: String!
+  createdAt: Date!
+  updatedAt: Date!
+  userId: Int!
+}
+
+type Mutation {
+  createNotificationStatus(input: CreateNotificationStatusInput!): String
+}
+
+input CreateNotificationStatusInput {
+  userIds: [Int]!
+  title: String!
+  notificationHtml: String!
+}

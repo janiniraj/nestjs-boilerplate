@@ -1,15 +1,19 @@
 # Logging
 
 # Users
-  ☐ Two-factor auth
+☐ Two-factor auth
 
 # Notifications
 ☐ Notifications
 
 # Emailer
-☐ Create emailer module
+
+# Misc
+☐ Build command line tool to parse through code and identify endpoints and protections on them
+☐ Create some type of command line tool infrastructure (load up the app to issue commands to services, etc...)
 
 Archive:
+  ✔ Create emailer module @done(19-01-14 20:47)
   ✔ Password reset @done(19-01-13 21:00)
   ✔ Log the beginning of each controller/resolver action @done(19-01-13 16:38)
   ✔ Add exception interceptor to log to file @done(19-01-13 15:53)
