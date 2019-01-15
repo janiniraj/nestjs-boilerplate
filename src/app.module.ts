@@ -9,6 +9,8 @@ import { RoleModule } from './role/role.module';
 import { SessionMiddleware } from './common/middleware/session.middleware';
 import { PasswordResetModule } from './passwordReset/passwordReset.module';
 import { NotificationStatusModule } from './notificationStatus/notificationStatus.module';
+import { AppService } from './app.service';
+import { MetadataScanner } from '@nestjs/core/metadata-scanner';
 
 @Module({
   imports: [
@@ -27,7 +29,7 @@ import { NotificationStatusModule } from './notificationStatus/notificationStatu
     NotificationStatusModule
   ],
   controllers: [],
-  providers: []
+  providers: [AppService, MetadataScanner]
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
