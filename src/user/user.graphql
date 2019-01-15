@@ -11,6 +11,7 @@ type User {
   roles: [Role]
   configSettings: [UserConfig]
   loginRecords: [LoginRecord]
+  notifications: [NotificationStatus]
 }
 
 type Query {

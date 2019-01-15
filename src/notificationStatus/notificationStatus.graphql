@@ -4,6 +4,7 @@ type NotificationStatus {
   createdAt: Date!
   updatedAt: Date!
   userId: Int!
+  notification: Notification!
 }
 
 type Mutation {

@@ -42,4 +42,8 @@ export class NotificationStatusService {
 
     return 'Success';
   }
+
+  async findAll(userId: number) {
+    return await this.notificationStatusRepository.find({ userId });
+  }
 }

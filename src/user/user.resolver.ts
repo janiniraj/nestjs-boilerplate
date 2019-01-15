@@ -18,6 +18,7 @@ import { UseGuards } from '@nestjs/common';
 import { User } from './user.entity';
 import { UserConfigService } from 'src/userConfig/userConfig.service';
 import { UserService } from './user.service';
+import { NotificationStatusService } from 'src/notificationStatus/notificationStatus.service';
 
 @Resolver('User')
 @UseGuards(GqlAuthGuard, GqlRolesGuard)
@@ -28,7 +29,8 @@ export class UserResolver {
     private readonly userService: UserService,
     private readonly roleService: RoleService,
     private readonly userConfigService: UserConfigService,
-    private readonly loginRecordService: LoginRecordService
+    private readonly loginRecordService: LoginRecordService,
+    private readonly notificationStatusService: NotificationStatusService
   ) {}
 
   @Query()
@@ -59,5 +61,10 @@ export class UserResolver {
   @ResolveProperty()
   async loginRecords(@Parent() user: User) {
     return await this.loginRecordService.findAll({ userId: user.id });
+  }
+
+  @ResolveProperty()
+  async notifications(@Parent() user: User) {
+    return await this.notificationStatusService.findAll(user.id);
   }
 }

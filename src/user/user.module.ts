@@ -8,6 +8,7 @@ import { UserResolver } from './user.resolver';
 import { RoleModule } from 'src/role/role.module';
 import { UserConfigModule } from 'src/userConfig/userConfig.module';
 import { LoginRecordModule } from 'src/loginRecord/loginRecord.module';
+import { NotificationStatusModule } from 'src/notificationStatus/notificationStatus.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { LoginRecordModule } from 'src/loginRecord/loginRecord.module';
     forwardRef(() => AuthModule),
     RoleModule,
     UserConfigModule,
-    forwardRef(() => LoginRecordModule)
+    forwardRef(() => LoginRecordModule),
+    NotificationStatusModule
   ],
   controllers: [UserController],
   providers: [UserService, UserResolver],

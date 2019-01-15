@@ -32,11 +32,12 @@ export class NotificationStatus {
 
   @ManyToOne((type) => User, (user) => user.notifications)
   user: User;
+  @Column()
+  userId: number;
 
   @OneToOne((type) => Notification, { cascade: true })
   @JoinColumn()
   notification: Notification;
-
   @Column()
-  userId: number;
+  notificationId: number;
 }

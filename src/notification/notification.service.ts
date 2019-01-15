@@ -13,4 +13,8 @@ export class NotificationService {
     @InjectRepository(Notification)
     private readonly notificationRepository: Repository<Notification>
   ) {}
+
+  async findOneById(id: number) {
+    return await this.notificationRepository.findOne({ id });
+  }
 }
