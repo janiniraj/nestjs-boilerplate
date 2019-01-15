@@ -46,4 +46,16 @@ export class NotificationStatusService {
   async findAll(userId: number) {
     return await this.notificationStatusRepository.find({ userId });
   }
+
+  async update(
+    userId: number,
+    uuid: string,
+    status: 'read' | 'unread' | 'deleted'
+  ) {
+    await this.notificationStatusRepository.update(
+      { userId, uuid },
+      { status }
+    );
+    return await this.notificationStatusRepository.findOne({ uuid });
+  }
 }

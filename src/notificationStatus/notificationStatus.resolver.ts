@@ -3,7 +3,8 @@ import {
   Mutation,
   Args,
   Parent,
-  ResolveProperty
+  ResolveProperty,
+  Context
 } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
@@ -14,7 +15,6 @@ import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
 import { CreateNotificationDto } from './dtos/createNotification.dto';
 import { Roles } from 'src/role/decorators/roles.decorator';
 import { roles } from 'src/common/constants';
-import { User } from 'src/user/user.entity';
 import { NotificationService } from 'src/notification/notification.service';
 import { NotificationStatus } from './notificationStatus.entity';
 
@@ -38,6 +38,15 @@ export class NotificationStatusResolver {
       `Creating a notification, title: ${notificationInput.title}`
     );
     return this.notificationStatusService.createNotification(notificationInput);
+  }
+
+  @Mutation()
+  async updateNotificationStatus(
+    @Args('uuid') uuid: string,
+    @Args('status') status: 'read' | 'unread' | 'deleted',
+    @Context('req') { user }
+  ) {
+    return await this.notificationStatusService.update(user.id, uuid, status);
   }
 
   @ResolveProperty()

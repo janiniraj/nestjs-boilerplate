@@ -3,12 +3,12 @@ type NotificationStatus {
   uuid: String!
   createdAt: Date!
   updatedAt: Date!
-  userId: Int!
   notification: Notification!
 }
 
 type Mutation {
   createNotificationStatus(input: CreateNotificationStatusInput!): String
+  updateNotificationStatus(uuid: String!, status: String!): NotificationStatus
 }
 
 input CreateNotificationStatusInput {
