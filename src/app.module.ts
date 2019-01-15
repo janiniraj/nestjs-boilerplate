@@ -9,7 +9,6 @@ import { RoleModule } from './role/role.module';
 import { SessionMiddleware } from './common/middleware/session.middleware';
 import { PasswordResetModule } from './passwordReset/passwordReset.module';
 import { NotificationStatusModule } from './notificationStatus/notificationStatus.module';
-import { EndpointScanModule } from './endpointScan/endpointScan.module';
 
 @Module({
   imports: [
@@ -25,8 +24,7 @@ import { EndpointScanModule } from './endpointScan/endpointScan.module';
     RoleModule,
     UserConfigModule,
     PasswordResetModule,
-    NotificationStatusModule,
-    EndpointScanModule
+    NotificationStatusModule
   ],
   controllers: [],
   providers: []
