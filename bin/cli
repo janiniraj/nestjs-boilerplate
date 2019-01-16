@@ -1,0 +1,30 @@
+#!/usr/bin/env ts-node -r tsconfig-paths/register
+
+(() => {
+  const path = require('path');
+  const PATH_PROD_CODE_DIR = '../dist';
+  const PATH_DEV_CODE_DIR = '../src';
+  const PATH_BOOTSTRAP_CLI_FILE = './cli';
+
+  switch (process.env.NODE_ENV) {
+    case 'production':
+    case 'prod':
+      require(path.resolve(
+        __dirname,
+        PATH_PROD_CODE_DIR,
+        PATH_BOOTSTRAP_CLI_FILE + '.js'
+      ));
+      break;
+
+    case 'development':
+    case 'dev':
+    default:
+      // require('ts-node').register();
+      require(path.resolve(
+        __dirname,
+        PATH_DEV_CODE_DIR,
+        PATH_BOOTSTRAP_CLI_FILE + '.ts'
+      ));
+      break;
+  }
+})();

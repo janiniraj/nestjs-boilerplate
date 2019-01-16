@@ -9,6 +9,7 @@ import { RoleModule } from './role/role.module';
 import { SessionMiddleware } from './common/middleware/session.middleware';
 import { PasswordResetModule } from './passwordReset/passwordReset.module';
 import { NotificationStatusModule } from './notificationStatus/notificationStatus.module';
+import { CommandModule } from 'nestjs-command';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { NotificationStatusModule } from './notificationStatus/notificationStatu
     RoleModule,
     UserConfigModule,
     PasswordResetModule,
-    NotificationStatusModule
+    NotificationStatusModule,
+    CommandModule
   ],
   controllers: [],
   providers: []
