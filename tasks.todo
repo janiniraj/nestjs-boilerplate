@@ -8,11 +8,11 @@
 # Emailer
 
 # Misc
-☐ Create some type of command line tool infrastructure (load up the app to issue commands to services, etc...)
 ☐ Docker development environment
 ☐ Testing!
 
 Archive:
+  ✔ Create some type of command line tool infrastructure (load up the app to issue commands to services, etc...) @done(19-01-16 00:03)
   ✔ Notifications @done(19-01-15 21:43)
   ✔ Build command line tool to parse through code and identify endpoints and protections on them @done(19-01-15 21:43)
   ✔ Create emailer module @done(19-01-14 20:47)
