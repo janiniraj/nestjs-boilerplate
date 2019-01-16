@@ -5,6 +5,31 @@ import { readFileSync } from 'fs';
 const SRC_DIR = __dirname + '/../../';
 console.log(SRC_DIR);
 
+const filterDecorators = (decorators: string[]): [string, string[]] => {
+  let typeDecorator = '';
+  const securityDecorators: string[] = [];
+
+  for (const decorator of decorators) {
+    if (
+      [
+        '@Post(',
+        '@Get(',
+        '@Put(',
+        '@Delete(',
+        '@Patch(',
+        '@Query(',
+        '@Mutation('
+      ].some((type) => decorator.includes(type))
+    ) {
+      typeDecorator = decorator;
+    } else {
+      securityDecorators.push(decorator);
+    }
+  }
+
+  return [typeDecorator, securityDecorators];
+};
+
 const findEndpointFiles = () => {
   const controllers = glob.sync(SRC_DIR + '**/*.controller.ts');
   const resolvers = glob.sync(SRC_DIR + '**/*.resolver.ts');
@@ -93,6 +118,7 @@ const findMethodDecorators = (
 
     // Get class decorators
     const classDecorators = findGlobalGuards(contents);
+    let classGuards = [];
     for (const decorator of classDecorators) {
       if (
         decorator.includes('@Controller') ||
@@ -103,6 +129,7 @@ const findMethodDecorators = (
       } else if (decorator.includes('@UseGuards')) {
         // Guards for the whole class
         const [_, guardsStr] = decorator.match(/^.*\((.+?)\)/);
+        classGuards = guardsStr.split(',');
         console.log('Class Guards: ', chalk.magenta(guardsStr));
       } else {
         console.log(
@@ -114,7 +141,23 @@ const findMethodDecorators = (
     // Get method decorators
     const methodDecorators = findMethodDecorators(contents);
     for (const method of methodDecorators) {
-      console.log(method.name);
+      if (
+        method.decorators.some(
+          (decorator) => decorator === '@ResolveProperty()'
+        )
+      ) {
+        continue;
+      }
+
+      const [type, securityDecorators] = filterDecorators(method.decorators);
+      console.log();
+      if (classGuards.length === 0 && securityDecorators.length === 0) {
+        console.log(chalk.red('WARNING - NO SECURITY DETECTED FOR ENDPOINT'));
+      }
+      if (securityDecorators.length > 0) {
+        console.log(chalk.magenta(securityDecorators.join(', ')));
+      }
+      console.log(method.name + ' - ' + chalk.green(type));
     }
   }
 
