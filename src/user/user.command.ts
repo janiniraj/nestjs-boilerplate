@@ -30,7 +30,7 @@ export class UserCommand {
   }
 
   @Command({
-    command: 'user:changePass [-e | --email]',
+    command: 'user:change-pass [-e | --email] [-p | --password]',
     describe: 'change the user password'
   })
   async changePass(

@@ -10,6 +10,7 @@ import { SessionMiddleware } from './common/middleware/session.middleware';
 import { PasswordResetModule } from './passwordReset/passwordReset.module';
 import { NotificationStatusModule } from './notificationStatus/notificationStatus.module';
 import { CommandModule } from 'nestjs-command';
+import { QuietLoggerModule } from './logger/QuietLogger.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { CommandModule } from 'nestjs-command';
     UserConfigModule,
     PasswordResetModule,
     NotificationStatusModule,
-    CommandModule
+    CommandModule,
+    QuietLoggerModule
   ],
   controllers: [],
   providers: []
