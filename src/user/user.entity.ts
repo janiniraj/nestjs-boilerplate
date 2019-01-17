@@ -10,7 +10,7 @@ import {
   BeforeUpdate
 } from 'typeorm';
 import { IsEmail } from 'class-validator';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { Role } from 'src/role/role.entity';
 import { UserConfig } from 'src/userConfig/userConfig.entity';
 import { LoginRecord } from 'src/loginRecord/loginRecord.entity';

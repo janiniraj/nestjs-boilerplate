@@ -1,4 +1,4 @@
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import * as dayjs from 'dayjs';
 import * as owasp from 'owasp-password-strength-test';
 import * as randToken from 'rand-token';
@@ -6,6 +6,7 @@ import { BackendLogger } from 'src/logger/BackendLogger';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
+
 import { EmailerService } from 'src/emailer/emailer.service';
 import { EMAIL_FROM } from 'src/common/constants';
 

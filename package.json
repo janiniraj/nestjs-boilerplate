@@ -19,7 +19,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "endpoint:scan": "ts-node -r tsconfig-paths/register src/cli/endpointScan/endpointScan.ts"
+    "endpoint:scan": "ts-node -r tsconfig-paths/register src/cli/endpointScan/endpointScan.ts",
+    "docker:dev": "docker run --rm -it --init -p 5555:5555 -v \"${PWD}:/usr/src/app\" nestjs:dev npm run dev"
   },
   "dependencies": {
     "@nestjs/common": "^5.4.0",
@@ -28,7 +29,7 @@
     "@nestjs/jwt": "^0.2.1",
     "@nestjs/passport": "^5.1.0",
     "@nestjs/typeorm": "^5.2.2",
-    "@types/bcrypt": "^3.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/cls-hooked": "^4.2.1",
     "@types/dotenv": "^6.1.0",
     "@types/geoip-lite": "^1.1.29",
@@ -40,7 +41,7 @@
     "@types/winston": "^2.4.4",
     "@types/yargs": "^12.0.5",
     "apollo-server-express": "^2.3.1",
-    "bcrypt": "^3.0.3",
+    "bcryptjs": "^2.4.3",
     "chalk": "^2.4.2",
     "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",

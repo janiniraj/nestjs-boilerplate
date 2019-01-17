@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as dayjs from 'dayjs';
-import * as bcrypt from 'bcrypt';
 
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
