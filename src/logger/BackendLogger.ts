@@ -2,8 +2,8 @@ import * as dayjs from 'dayjs';
 import * as winston from 'winston';
 import chalk from 'chalk';
 import { Logger } from '@nestjs/common';
-import { REQUEST_ID, SESSION_USER } from 'src/common/constants';
-import { SessionMiddleware } from 'src/common/middleware/session.middleware';
+import { REQUEST_ID, SESSION_USER } from '../common/constants';
+import { SessionMiddleware } from '../common/middleware/session.middleware';
 import { User } from 'src/user/user.entity';
 
 const formatter = (info) => {

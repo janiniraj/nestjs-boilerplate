@@ -49,6 +49,6 @@ export class UserService {
     user.lastLogin = new Date(dayjs().toISOString());
     user.loginAttempts = 0;
 
-    await this.userRepository.save(user);
+    await this.save(user);
   }
 }

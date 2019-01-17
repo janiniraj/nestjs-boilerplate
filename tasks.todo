@@ -8,10 +8,11 @@
 # Emailer
 
 # Misc
-☐ Add sane security defaults/packages
 ☐ Testing!
+☐ Write some basic docs about all the systems/architecture
 
 Archive:
+  ✔ Add sane security defaults/packages @done(19-01-16 22:29)
   ✔ Docker development environment @done(19-01-16 22:17)
   ✘ Two-factor auth @cancelled(19-01-16 10:00)
   ✔ Create some type of command line tool infrastructure (load up the app to issue commands to services, etc...) @done(19-01-16 00:03)

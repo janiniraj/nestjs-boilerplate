@@ -14,11 +14,11 @@
     "prestart:prod": "rimraf dist && tsc",
     "start:prod": "node dist/main.js",
     "lint": "tslint -p tsconfig.json -c tslint.json",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
+    "test": "NODE_PATH=. jest --forceExit",
+    "test:watch": "NODE_PATH=. jest --watch",
+    "test:cov": "NODE_PATH=. jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "NODE_PATH=. jest --config ./test/jest-e2e.json",
     "endpoint:scan": "ts-node -r tsconfig-paths/register src/cli/endpointScan/endpointScan.ts",
     "docker:dev": "docker run --rm -it --init -p 5555:5555 -v \"${PWD}:/usr/src/app\" nestjs:dev npm run dev"
   },
@@ -74,7 +74,7 @@
     "winston": "^3.1.0"
   },
   "devDependencies": {
-    "@nestjs/testing": "^5.1.0",
+    "@nestjs/testing": "^5.6.2",
     "@types/express": "^4.16.0",
     "@types/jest": "^23.3.1",
     "@types/node": "^10.7.1",
@@ -90,10 +90,17 @@
     "tslint": "5.11.0"
   },
   "jest": {
+    "setupFiles": [
+      "./common/testing/setup.ts"
+    ],
     "moduleFileExtensions": [
       "js",
       "json",
       "ts"
+    ],
+    "modulePaths": [
+      "node_modules",
+      "./"
     ],
     "rootDir": "src",
     "testRegex": ".spec.ts$",

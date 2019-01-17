@@ -7,3 +7,4 @@ ormlogs.log
 
 logs/*.log
 dist
+coverage
