@@ -116,4 +116,31 @@ import { ${uppercaseName}Controller } from './${name}.controller';
 })
 export class ${uppercaseName}Module {}`;
   fs.writeFileSync(dir + '/' + name + '.module.ts', module);
+
+  // Spec file
+  const spec = `
+import { Test } from '@nestjs/testing';
+import { ${uppercaseName}Service } from './${name}.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+describe('${uppercaseName}Service', () => {
+  let ${name}Service: ${uppercaseName}Service;
+
+  beforeEach(async () => {
+    const module = await Test.createTestingModule({
+      imports: [TypeOrmModule.forFeature(${uppercaseName})],
+      providers: [${uppercaseName}Service]
+    }).compile();
+
+    ${name}Service = module.get<${uppercaseName}Service>(${uppercaseName}Service);
+  });
+
+  describe('test', () => {
+    it('should do something', async () => {
+      expect(something)
+    });
+  });
+});
+  `;
+  fs.writeFileSync(dir + '/' + name + '.service.spec.ts', spec);
 })();

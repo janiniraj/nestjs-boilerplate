@@ -11,6 +11,7 @@ import { PasswordResetModule } from './passwordReset/passwordReset.module';
 import { NotificationStatusModule } from './notificationStatus/notificationStatus.module';
 import { CommandModule } from 'nestjs-command';
 import { QuietLoggerModule } from './logger/QuietLogger.module';
+import { TypeOrmConfigService } from './typeOrmConfig/typeOrmConfig.service';
 
 @Module({
   imports: [
@@ -20,7 +21,9 @@ import { QuietLoggerModule } from './logger/QuietLogger.module';
       resolvers: { Date: DateScalar },
       context: ({ req }) => ({ req })
     }),
-    TypeOrmModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      useClass: TypeOrmConfigService
+    }),
     UserModule,
     AuthModule,
     RoleModule,

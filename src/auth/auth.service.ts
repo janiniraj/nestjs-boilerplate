@@ -6,6 +6,7 @@ import { JwtPayload } from './interfaces/jwtPayload.interface';
 import { BackendLogger } from 'src/logger/BackendLogger';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
+import { TOKEN_EXPIRES_IN } from 'src/common/constants';
 
 @Injectable()
 export class AuthService {
@@ -67,7 +68,7 @@ export class AuthService {
     });
 
     return {
-      expiresIn: '24h',
+      expiresIn: TOKEN_EXPIRES_IN,
       accessToken
     };
   }

@@ -3,8 +3,9 @@ import * as bcrypt from 'bcryptjs';
 import { AuthService } from './auth.service';
 import { UserService } from 'src/user/user.service';
 import { user } from './fixtures/user';
-import { UserModule } from 'src/user/user.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { userServiceFixture } from 'src/common/testing/fixtures/userServiceFixture';
+import { jwtServiceFixture } from 'src/common/testing/fixtures/jwtServiceFixture';
+import { TOKEN_EXPIRES_IN } from 'src/common/constants';
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -12,8 +13,7 @@ describe('AuthService', () => {
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-      imports: [TypeOrmModule.forRoot(), UserModule],
-      providers: [AuthService, UserService]
+      providers: [AuthService, userServiceFixture, jwtServiceFixture]
     }).compile();
 
     authService = module.get<AuthService>(AuthService);
@@ -28,9 +28,18 @@ describe('AuthService', () => {
       jest.spyOn(bcrypt, 'compareSync').mockImplementation(() => true);
 
       expect(await authService.login('test@test.com', 'pass')).toMatchObject({
-        expiresIn: '24h',
+        expiresIn: TOKEN_EXPIRES_IN,
         accessToken: expect.any(String)
       });
+    });
+
+    it('should fail to login when a bad password is given', async () => {
+      jest.spyOn(bcrypt, 'compareSync').mockImplementation(() => false);
+      try {
+        await authService.login('test@test.com', 'pass');
+      } catch (err) {
+        expect(err.message).toBe('Invalid email/password');
+      }
     });
   });
 });

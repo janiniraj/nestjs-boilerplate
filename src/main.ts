@@ -18,10 +18,6 @@ async function bootstrap() {
   // Trust proxy for getting client's IP
   app.enable('trust proxy');
 
-  // Enable security middleware
-  app.use(helmet());
-  app.use(csurf());
-
   // Rate limit API requests
   app.use(
     new rateLimit({
@@ -29,8 +25,6 @@ async function bootstrap() {
       max: 1000
     })
   );
-
-  app.enableCors();
 
   // Configure any globally configured modules
   owasp.config({
@@ -44,6 +38,10 @@ async function bootstrap() {
   // Register global providers
   app.useGlobalPipes(new ValidationPipe());
   // app.useGlobalFilters(new AllExceptionsFilter());
+
+  // Enable security middleware
+  app.use(helmet());
+  app.enableCors();
 
   // Handle uncaught/unhandled exceptions
   process.on('uncaughtException', (err) => {
