@@ -1,8 +1,11 @@
+import * as bcrypt from 'bcrypt';
 import { Injectable } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Command, Positional, Option } from 'nestjs-command';
 import { BackendLogger } from 'src/logger/BackendLogger';
+
 import { randomStr } from 'src/common/utils';
+import passport = require('passport');
 
 @Injectable()
 export class UserCommand {
@@ -10,7 +13,7 @@ export class UserCommand {
 
   constructor(private readonly userService: UserService) {}
 
-  @Command({ command: 'user:create <email>', describe: 'create a new user' })
+  @Command({ command: 'user:create [email]', describe: 'create a new user' })
   async create(
     @Positional({
       name: 'email',
@@ -24,5 +27,23 @@ export class UserCommand {
 
     await this.userService.createUser({ email, password });
     this.logger.log(`Created, generated password: ${password}`);
+  }
+
+  @Command({
+    command: 'user:changePass [-e | --email]',
+    describe: 'change the user password'
+  })
+  async changePass(
+    @Option({ name: 'email', alias: 'e', demandOption: true }) email: string,
+    @Option({ name: 'password', alias: 'p', demandOption: true })
+    newPass: string
+  ) {
+    this.logger.log(`Changing ${email}'s password, to password: ${newPass}`);
+
+    const user = await this.userService.findOneByEmail(email);
+    user.password = bcrypt.hashSync(newPass, 10);
+    await this.userService.save(user);
+
+    this.logger.log('Complete');
   }
 }

@@ -1,7 +1,7 @@
 # Logging
 
 # Users
-☐ Two-factor auth
+☐ Admin queries for internal admin panel
 
 # Notifications
 
@@ -12,6 +12,7 @@
 ☐ Testing!
 
 Archive:
+  ✘ Two-factor auth @cancelled(19-01-16 10:00)
   ✔ Create some type of command line tool infrastructure (load up the app to issue commands to services, etc...) @done(19-01-16 00:03)
   ✔ Notifications @done(19-01-15 21:43)
   ✔ Build command line tool to parse through code and identify endpoints and protections on them @done(19-01-15 21:43)
