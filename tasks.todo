@@ -8,10 +8,10 @@
 # Emailer
 
 # Misc
-☐ Testing!
 ☐ Write some basic docs about all the systems/architecture
 
 Archive:
+  ✔ Testing! @done(19-01-17 11:54)
   ✔ Add sane security defaults/packages @done(19-01-16 22:29)
   ✔ Docker development environment @done(19-01-16 22:17)
   ✘ Two-factor auth @cancelled(19-01-16 10:00)
