@@ -1,6 +1,9 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 import * as owasp from 'owasp-password-strength-test';
+import * as helmet from 'helmet';
+import * as csurf from 'csurf';
+import * as rateLimit from 'express-rate-limit';
 
 import { AppModule } from './app.module';
 import { BackendLogger } from './logger/BackendLogger';
@@ -14,6 +17,20 @@ async function bootstrap() {
 
   // Trust proxy for getting client's IP
   app.enable('trust proxy');
+
+  // Enable security middleware
+  app.use(helmet());
+  app.use(csurf());
+
+  // Rate limit API requests
+  app.use(
+    new rateLimit({
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: 1000
+    })
+  );
+
+  app.enableCors();
 
   // Configure any globally configured modules
   owasp.config({

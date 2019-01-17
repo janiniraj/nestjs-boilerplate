@@ -8,10 +8,11 @@
 # Emailer
 
 # Misc
-☐ Docker development environment
+☐ Add sane security defaults/packages
 ☐ Testing!
 
 Archive:
+  ✔ Docker development environment @done(19-01-16 22:17)
   ✘ Two-factor auth @cancelled(19-01-16 10:00)
   ✔ Create some type of command line tool infrastructure (load up the app to issue commands to services, etc...) @done(19-01-16 00:03)
   ✔ Notifications @done(19-01-15 21:43)
