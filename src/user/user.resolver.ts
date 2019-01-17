@@ -45,7 +45,7 @@ export class UserResolver {
     @Args('email') email: string,
     @Args('password') password: string
   ) {
-    return this.userService.createUser({ email, password });
+    return this.userService.create({ email, password });
   }
 
   @ResolveProperty()

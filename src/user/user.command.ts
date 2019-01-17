@@ -5,7 +5,6 @@ import { Command, Positional, Option } from 'nestjs-command';
 import { BackendLogger } from 'src/logger/BackendLogger';
 
 import { randomStr } from 'src/common/utils';
-import passport = require('passport');
 
 @Injectable()
 export class UserCommand {
@@ -25,7 +24,7 @@ export class UserCommand {
     this.logger.log(`Creating new user: ${email}`);
     const password = randomStr(16);
 
-    await this.userService.createUser({ email, password });
+    await this.userService.create({ email, password });
     this.logger.log(`Created, generated password: ${password}`);
   }
 

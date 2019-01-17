@@ -54,19 +54,19 @@ export class User {
   resetTokenExpires: Date;
 
   @OneToMany((type) => Role, (role) => role.user)
-  roles: Role[];
+  roles?: Role[];
 
   @OneToMany((type) => UserConfig, (config) => config.user)
-  configSettings: UserConfig[];
+  configSettings?: UserConfig[];
 
   @OneToMany((type) => LoginRecord, (loginRecord) => loginRecord.user)
-  loginRecords: LoginRecord[];
+  loginRecords?: LoginRecord[];
 
   @OneToMany(
     (type) => NotificationStatus,
     (notificationStatus) => notificationStatus.user
   )
-  notifications: NotificationStatus[];
+  notifications?: NotificationStatus[];
 
   @BeforeInsert()
   hashPassword() {

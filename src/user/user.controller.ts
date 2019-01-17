@@ -28,6 +28,6 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   async createUser(@Body(new ValidationPipe()) createUserDto: UserDto) {
     this.logger.log(`Creating new user: ${createUserDto.email}`);
-    return await this.userService.createUser(createUserDto);
+    return await this.userService.create(createUserDto);
   }
 }
