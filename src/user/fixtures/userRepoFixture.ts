@@ -1,4 +1,4 @@
-import { userEntity } from 'src/common/testing/fixtures/user';
+import { userEntity } from 'src/common/testing/fixtures/userFixture';
 
 export class UserRepoFixture {
   findOne() {

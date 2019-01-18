@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import * as bcrypt from 'bcryptjs';
 import { AuthService } from './auth.service';
 import { UserService } from 'src/user/user.service';
-import { userEntity } from '../common/testing/fixtures/user';
+import { userEntity } from '../common/testing/fixtures/userFixture';
 import { userServiceFixture } from 'src/common/testing/fixtures/userServiceFixture';
 import { jwtServiceFixture } from 'src/common/testing/fixtures/jwtServiceFixture';
 import { TOKEN_EXPIRES_IN } from 'src/common/constants';

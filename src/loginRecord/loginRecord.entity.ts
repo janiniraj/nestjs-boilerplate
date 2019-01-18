@@ -34,8 +34,8 @@ export class LoginRecord {
   ip: string;
 
   @ManyToOne((type) => User, (user) => user.loginRecords)
-  user: User;
+  user?: User;
 
   @Column()
-  userId: number;
+  userId?: number;
 }

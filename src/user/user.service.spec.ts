@@ -4,7 +4,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { UserRepoFixture } from './fixtures/userRepoFixture';
 import { UserService } from './user.service';
 import { fakeEmail } from 'src/common/testing/fakes';
-import { userEntity } from 'src/common/testing/fixtures/user';
+import { userEntity } from 'src/common/testing/fixtures/userFixture';
 
 describe('UserService', () => {
   let userService: UserService;

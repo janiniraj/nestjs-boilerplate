@@ -5,6 +5,6 @@ export class SendDto {
   from: string;
   title: string;
   subject: string;
-  snippet: string;
+  snippet: 'password-reset';
   params: any;
 }

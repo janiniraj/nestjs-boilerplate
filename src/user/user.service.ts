@@ -17,7 +17,6 @@ export class UserService {
   ) {}
 
   async findOneByEmail(email: string) {
-    console.log(this.userRepository);
     return await this.userRepository.findOne({
       where: { email },
       relations: ['roles']

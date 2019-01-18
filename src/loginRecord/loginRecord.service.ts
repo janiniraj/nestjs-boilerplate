@@ -5,7 +5,6 @@ import * as geoip from 'geoip-lite';
 import { Repository } from 'typeorm';
 import { BackendLogger } from 'src/logger/BackendLogger';
 import { LoginRecord } from './loginRecord.entity';
-import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class LoginRecordService {
@@ -13,8 +12,7 @@ export class LoginRecordService {
 
   constructor(
     @InjectRepository(LoginRecord)
-    private readonly loginRecordRepository: Repository<LoginRecord>,
-    private readonly userService: UserService
+    private readonly loginRecordRepository: Repository<LoginRecord>
   ) {}
 
   async create(ip: string, userId: number) {
@@ -23,7 +21,7 @@ export class LoginRecordService {
     const locationInfo = geoip.lookup(ip);
     if (!locationInfo) {
       this.logger.warn('Could not find location info for user IP');
-      return;
+      return false;
     }
     const { country, region, city } = locationInfo;
     const [lat, long] = locationInfo.ll;

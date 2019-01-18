@@ -24,13 +24,18 @@ export class EmailerService {
 
     const result = await transporter.sendMail(mailOptions);
     this.logger.debug(`Sent email: ${JSON.stringify(result.messageId)}`);
+    /* istanbul ignore else */
     if (isDevEnv()) {
       this.logger.debug(`Preview URL: ${nodemailer.getTestMessageUrl(result)}`);
     }
+
+    return true;
   }
 
   private async getTransporter() {
-    if (process.env.NODE_ENV === 'development') {
+    const { NODE_ENV } = process.env;
+    /* istanbul ignore else */
+    if (NODE_ENV === 'development' || NODE_ENV === 'test') {
       const testAccount = await nodemailer.createTestAccount();
       return nodemailer.createTransport({
         host: 'smtp.ethereal.email',
