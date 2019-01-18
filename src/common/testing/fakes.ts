@@ -11,3 +11,5 @@ export const fakeRegion = () => faker.address.county();
 export const fakeCity = () => faker.address.city();
 export const fakeLat = () => faker.address.latitude();
 export const fakeLong = () => faker.address.longitude();
+export const fakeUuid = () => faker.random.uuid();
+export const fakeWords = () => faker.random.words();

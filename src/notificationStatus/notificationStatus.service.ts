@@ -24,6 +24,7 @@ export class NotificationStatusService {
     notificationHtml
   }: CreateNotificationDto) {
     const newNotifications = [];
+    this.logger.log(`Creating notification for users: ${userIds.join(', ')}`);
 
     for (const userId of userIds) {
       const notification = new Notification();

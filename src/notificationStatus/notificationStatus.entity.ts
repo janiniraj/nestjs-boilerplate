@@ -31,13 +31,13 @@ export class NotificationStatus {
   updatedAt: Date;
 
   @ManyToOne((type) => User, (user) => user.notifications)
-  user: User;
+  user?: User;
   @Column()
-  userId: number;
+  userId?: number;
 
   @OneToOne((type) => Notification, { cascade: true })
   @JoinColumn()
-  notification: Notification;
+  notification?: Notification;
   @Column()
-  notificationId: number;
+  notificationId?: number;
 }
